@@ -1,0 +1,78 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class ServerConnectInfo
+{
+    public string ip;
+    public int port;
+}
+
+public class QueryAgentManager : MonoBehaviour
+{
+    [PowerInspector.PowerList(Key = "ip")]
+    public List<ServerConnectInfo> serverConnectInfos = new List<ServerConnectInfo>();
+    public L4D2ServerQueryAgent agentPrefab;
+    public float timeGap = 1f;
+
+    protected List<L4D2ServerQueryAgent> agents = new List<L4D2ServerQueryAgent>();
+
+    #region Unity Life Cycle
+    // Start is called before the first frame update
+    void Start()
+    {
+        CreateAgentGroup();
+        StartCoroutine(QueryRoutine());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    IEnumerator QueryRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(timeGap);
+            foreach (var a in agents)
+            {
+                a.PerformServerQuery();
+            }
+        }
+    }
+    #endregion
+
+    #region Agents Management
+    public void CreateAgentGroup()
+    {
+        foreach (var a in agents)
+        {
+            Destroy(a.gameObject);
+        }
+        agents.Clear();
+
+        foreach (var s in serverConnectInfos)
+        {
+            var go = Instantiate(agentPrefab.gameObject);
+            var agent = go.GetComponent<L4D2ServerQueryAgent>();
+            agents.Add(agent);
+            go.transform.parent = transform;
+            go.name = "Agent-->" + s.ip + ":" + s.port.ToString();
+
+            agent.StartSession(s.ip, s.port);
+        }
+    }
+
+    public void DestroyAgentGroup()
+    {
+        foreach (var a in agents)
+        {
+            Destroy(a.gameObject);
+        }
+        agents.Clear();
+    }
+    #endregion
+}
