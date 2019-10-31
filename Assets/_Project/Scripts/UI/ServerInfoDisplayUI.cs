@@ -42,7 +42,7 @@ public class ServerInfoDisplayUI : MonoBehaviour
             if (!bindAgent.Connected || string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
             {
                 infoLayer.SetActive(true);
-                infoText.text = "正在连接...";
+                infoText.text = "正在连接...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
             }
             else
             {

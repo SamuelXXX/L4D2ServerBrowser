@@ -16,6 +16,7 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
     public L4D2ServerQueryAgent agentPrefab;
     public float timeGap = 1f;
 
+
     [System.NonSerialized]
     public List<L4D2ServerQueryAgent> agents = new List<L4D2ServerQueryAgent>();
 
@@ -23,14 +24,21 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
     // Start is called before the first frame update
     void Start()
     {
-        CreateAgentGroup();
-        StartCoroutine(QueryRoutine());
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+    #endregion
+
+    public void StartQuery(List<ServerConnectInfo> serverInfo)
+    {
+        serverConnectInfos = serverInfo;
+        CreateAgentGroup(serverInfo);
+        StartCoroutine(QueryRoutine());
     }
 
     IEnumerator QueryRoutine()
@@ -44,10 +52,9 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
             }
         }
     }
-    #endregion
 
     #region Agents Management
-    public void CreateAgentGroup()
+    public void CreateAgentGroup(List<ServerConnectInfo> serverConnectInfos)
     {
         foreach (var a in agents)
         {

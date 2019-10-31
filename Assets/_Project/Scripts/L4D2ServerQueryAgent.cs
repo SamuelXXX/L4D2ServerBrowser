@@ -39,6 +39,8 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     #region Unity Life Cycle
     public void StartSession(string ip, int port)
     {
+        this.ip = ip;
+        this.port = port;
         if (client != null)
             client.Close();
 
