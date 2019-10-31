@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: SamaelXXX
-  productName: L4D2ServerBrowser
+  productName: "\u6C42\u751F\u4E4B\u8DEF\u670D\u52A1\u5668\u67E5\u8BE2"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
