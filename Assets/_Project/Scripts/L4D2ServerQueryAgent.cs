@@ -15,17 +15,25 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     protected bool connected = false;
 
     public PowerButton button = new PowerButton("查询服务器", "PerformServerQuery", 30f);
+
+    public bool Connected
+    {
+        get
+        {
+            return connected;
+        }
+    }
     #endregion
 
     #region Runtime Data
     protected ValveServerQueryClient client;
 
     [SerializeField, RuntimeData]
-    protected ValveServerResponseData.A2S_Info serverInfo;
+    public ValveServerResponseData.A2S_Info serverInfo;
     [SerializeField, RuntimeData]
-    protected ValveServerResponseData.A2S_ChallengeNumber challengeNumberInfo;
+    public ValveServerResponseData.A2S_ChallengeNumber challengeNumberInfo;
     [SerializeField]
-    protected ValveServerResponseData.A2S_Player playersInfo;
+    public ValveServerResponseData.A2S_Player playersInfo;
     #endregion
 
     #region Unity Life Cycle

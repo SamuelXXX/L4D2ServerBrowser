@@ -9,14 +9,15 @@ public class ServerConnectInfo
     public int port;
 }
 
-public class QueryAgentManager : MonoBehaviour
+public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
 {
     [PowerInspector.PowerList(Key = "ip")]
     public List<ServerConnectInfo> serverConnectInfos = new List<ServerConnectInfo>();
     public L4D2ServerQueryAgent agentPrefab;
     public float timeGap = 1f;
 
-    protected List<L4D2ServerQueryAgent> agents = new List<L4D2ServerQueryAgent>();
+    [System.NonSerialized]
+    public List<L4D2ServerQueryAgent> agents = new List<L4D2ServerQueryAgent>();
 
     #region Unity Life Cycle
     // Start is called before the first frame update
@@ -64,6 +65,8 @@ public class QueryAgentManager : MonoBehaviour
 
             agent.StartSession(s.ip, s.port);
         }
+
+        ServerInfoDisplayUIManager.Instance.GenerateUIGroup();
     }
 
     public void DestroyAgentGroup()
