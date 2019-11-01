@@ -85,7 +85,8 @@ namespace ValveServerQuery
                     messageThread = null;
                 }
                 messageThread = new Thread(RecieveMessage);
-                messageThread.Start(clientSocket);
+                messageThreadFlag = true;
+                messageThread.Start();
 
                 Debug.Log("连接服务器成功");
             }
@@ -130,19 +131,16 @@ namespace ValveServerQuery
 
         public void Close()
         {
-            if (messageThread != null)
-            {
-                messageThread.Abort();
-                messageThread = null;
-            }
+            messageThreadFlag = false;
 
             if (clientSocket == null) return;
-            if (clientSocket.IsBound)
-            {
-                IsConnected = false;
-                clientSocket.Shutdown(SocketShutdown.Both);
-                clientSocket.Close();
-            }
+
+            IsConnected = false;
+            //clientSocket.Disconnect(false);
+            clientSocket.Shutdown(SocketShutdown.Both);
+            clientSocket.Close();
+            clientSocket.Dispose();
+
             clientSocket = null;
         }
 
@@ -173,23 +171,29 @@ namespace ValveServerQuery
                 IsConnected = false;
                 clientSocket.Shutdown(SocketShutdown.Both);
                 clientSocket.Close();
+                clientSocket.Dispose();
             }
         }
         #endregion
 
         #region Message Receiving
+        bool messageThreadFlag = false;
         /// <summary>
         /// Receive message handling
         /// </summary>
-        /// <param name="socket"></param>
-        private void RecieveMessage(object socket)
+        private void RecieveMessage()
         {
-            Socket myServerSocket = (Socket)socket;
-            while (true)
+            while (messageThreadFlag)
             {
                 try
                 {
-                    myServerSocket.Receive(receiveBuffer);
+                    if (clientSocket.Available <= 0)
+                    {
+                        Thread.Sleep(10);
+                        continue;
+                    }
+                    if (clientSocket == null) return;
+                    clientSocket.Receive(receiveBuffer);
                     ByteBuffer buff = new ByteBuffer(receiveBuffer);
 
                     lock (receivedDataQueue)
@@ -202,8 +206,16 @@ namespace ValveServerQuery
                     IsConnected = false;
                     Debug.LogError(ex.Message);
                     Debug.Log("Closing Socket------" + IP + ":" + Port.ToString());
-                    myServerSocket.Shutdown(SocketShutdown.Both);
-                    myServerSocket.Close();
+                    if (clientSocket != null)
+                    {
+                        lock (clientSocket)
+                        {
+                            clientSocket.Shutdown(SocketShutdown.Both);
+                            clientSocket.Close();
+                            clientSocket.Dispose();
+                        }
+                    }
+
                     break;
                 }
             }

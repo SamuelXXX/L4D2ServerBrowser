@@ -19,40 +19,40 @@ MonoBehaviour:
   mapInfos:
   - mapCNName: "\u6B7B\u4EA1\u4E2D\u5FC3"
     mapPosterImage: {fileID: 21300000, guid: fce21f43319adbf4bba93d4fc2902f96, type: 3}
-    mapCheckExp: ^c1m
+    mapCheckExp: ^[Cc]1m
   - mapCNName: "\u9ED1\u8272\u72C2\u6B22\u8282"
     mapPosterImage: {fileID: 21300000, guid: a7c5bbfc658f98b45a7d82dd9d28567d, type: 3}
-    mapCheckExp: ^c2m
+    mapCheckExp: ^[Cc]2m
   - mapCNName: "\u6CBC\u6CFD\u6FC0\u6218"
     mapPosterImage: {fileID: 21300000, guid: 021a18a1c4a715f4c9bc48008af977ce, type: 3}
-    mapCheckExp: ^c3m
+    mapCheckExp: ^[Cc]3m
   - mapCNName: "\u66B4\u98CE\u9AA4\u96E8"
     mapPosterImage: {fileID: 21300000, guid: e3a1cb67c76e50b4aab0b6a84dd7a05b, type: 3}
-    mapCheckExp: ^c4m
+    mapCheckExp: ^[Cc]4m
   - mapCNName: "\u6559\u533A"
     mapPosterImage: {fileID: 21300000, guid: c74e32067a7d2274f8be5bc7ac5a2995, type: 3}
-    mapCheckExp: ^c5m
+    mapCheckExp: ^[Cc]5m
   - mapCNName: "\u77ED\u6682\u65F6\u5149"
     mapPosterImage: {fileID: 21300000, guid: 655fc1fc1cbcf7d45b81a8d0b78bb40f, type: 3}
-    mapCheckExp: ^c6m
+    mapCheckExp: ^[Cc]6m
   - mapCNName: "\u727A\u7272"
     mapPosterImage: {fileID: 21300000, guid: bd5a92ac515fd0f4bb2cc05397abd782, type: 3}
-    mapCheckExp: ^c7m
+    mapCheckExp: ^[Cc]7m
   - mapCNName: "\u6BEB\u4E0D\u7559\u60C5"
     mapPosterImage: {fileID: 21300000, guid: 02bc6153b2595364cb9adf3d3fd7d504, type: 3}
-    mapCheckExp: ^c8m
+    mapCheckExp: ^[Cc]8m
   - mapCNName: "\u5760\u673A\u9669\u9014"
     mapPosterImage: {fileID: 21300000, guid: a23210c06fa2a574780bcf40814eaea8, type: 3}
-    mapCheckExp: ^c9m
+    mapCheckExp: ^[Cc]9m
   - mapCNName: "\u6B7B\u4EA1\u4E27\u949F"
     mapPosterImage: {fileID: 21300000, guid: 0e91ce66ea1c8a04895f830e853c62aa, type: 3}
-    mapCheckExp: ^c10m
+    mapCheckExp: ^[Cc]10m
   - mapCNName: "\u9759\u5BC2\u65F6\u5206"
     mapPosterImage: {fileID: 21300000, guid: df93bfb923c3a544aa862ac61b04e787, type: 3}
-    mapCheckExp: ^c11m
+    mapCheckExp: ^[Cc]11m
   - mapCNName: "\u8840\u8165\u6536\u83B7"
     mapPosterImage: {fileID: 21300000, guid: a14be9afcce542443bc97d29720404bc, type: 3}
-    mapCheckExp: ^c12m
+    mapCheckExp: ^[Cc]12m
   - mapCNName: "\u523A\u9AA8\u5BD2\u6EAA"
     mapPosterImage: {fileID: 21300000, guid: c89b6c4843304eb4e984db2e3f982491, type: 3}
-    mapCheckExp: ^c13m
+    mapCheckExp: ^[Cc]13m

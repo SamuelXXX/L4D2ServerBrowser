@@ -119,16 +119,12 @@ namespace ValveServerQuery
 
         public float ReadFloat()
         {
-            byte[] temp = BitConverter.GetBytes(reader.ReadSingle());
-            Array.Reverse(temp);
-            return BitConverter.ToSingle(temp, 0);
+            return reader.ReadSingle();
         }
 
         public double ReadDouble()
         {
-            byte[] temp = BitConverter.GetBytes(reader.ReadDouble());
-            Array.Reverse(temp);
-            return BitConverter.ToDouble(temp, 0);
+            return reader.ReadDouble();
         }
 
         public string ReadString()

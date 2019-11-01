@@ -83,6 +83,7 @@ namespace ValveServerQuery
                 score = byteBuffer.ReadInt();
                 duration = byteBuffer.ReadFloat();
             }
+
         }
 
         [System.Serializable]

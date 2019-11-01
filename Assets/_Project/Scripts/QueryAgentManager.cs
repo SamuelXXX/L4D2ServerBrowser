@@ -6,7 +6,7 @@ using UnityEngine;
 public class ServerConnectInfo
 {
     public string ip;
-    public int port;
+    public ushort port;
 }
 
 public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
@@ -41,6 +41,13 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
         StartCoroutine(QueryRoutine());
     }
 
+    public void StopQuery()
+    {
+        StopCoroutine("QueryRoutine");
+        DestroyAgentGroup();
+        serverConnectInfos = null;
+    }
+
     IEnumerator QueryRoutine()
     {
         while (true)
@@ -54,7 +61,7 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
     }
 
     #region Agents Management
-    public void CreateAgentGroup(List<ServerConnectInfo> serverConnectInfos)
+    void CreateAgentGroup(List<ServerConnectInfo> serverConnectInfos)
     {
         foreach (var a in agents)
         {
@@ -70,17 +77,15 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
             go.transform.parent = transform;
             go.name = "Agent-->" + s.ip + ":" + s.port.ToString();
 
-            agent.StartSession(s.ip, s.port);
+            agent.StartQuerySession(s.ip, s.port);
         }
-
-        ServerInfoDisplayUIManager.Instance.GenerateUIGroup();
     }
 
-    public void DestroyAgentGroup()
+    void DestroyAgentGroup()
     {
         foreach (var a in agents)
         {
-            Destroy(a.gameObject);
+            DestroyImmediate(a.gameObject);
         }
         agents.Clear();
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerInfoDisplayUIManager : ShortLifeSingleton<ServerInfoDisplayUIManager>
+public class ServerInfoDisplayUIManager : MonoBehaviour
 {
     public RectTransform leftLayout;
     public RectTransform rightLayout;
@@ -10,25 +10,19 @@ public class ServerInfoDisplayUIManager : ShortLifeSingleton<ServerInfoDisplayUI
     protected List<ServerInfoDisplayUI> managedDisplayUI = new List<ServerInfoDisplayUI>();
 
     #region Unity Life Cycle
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         float height = Mathf.Max(leftLayout.rect.height, rightLayout.rect.height);
-        GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height+40f);
+        GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height + 40f);
     }
     #endregion
 
-    public void GenerateUIGroup()
+    public void GenerateUIGroup(List<L4D2ServerQueryAgent> agents)
     {
         DestroyUIGroup();
         RectTransform curLayout = leftLayout;
-        foreach (var a in QueryAgentManager.Instance.agents)
+        foreach (var a in agents)
         {
             var go = Instantiate(uiPrefab.gameObject);
             go.SetActive(true);
@@ -43,6 +37,7 @@ public class ServerInfoDisplayUIManager : ShortLifeSingleton<ServerInfoDisplayUI
                 curLayout = leftLayout;
             }
             ui.BindAgent(a);
+            managedDisplayUI.Add(ui);
         }
     }
 

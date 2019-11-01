@@ -3,34 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ServerInfoDisplayUI : MonoBehaviour
+public class PageUIDetailInfo : PageUIBase
 {
     #region UI Settings
-    [Header("UI Component Reference")]
+    [Header("UI Reference")]
+    public Sprite defaultPosterImage;
     public Image posterImage;
     public Text serverNameText;
     public Text mapCNNameText;
     public Text mapIndexText;
     public Text playerCountText;
-    public Text playersNameText;
-    public Button moreInfoButton;
+    public Text ipAddressText;
 
     public GameObject infoLayer;
     public Text infoText;
+    public Button exitButton;
+
+    public PlayerInfoUIManager infoListUI;
+
     #endregion
 
-    protected L4D2ServerQueryAgent bindAgent;
+    #region Runtime Data
+    L4D2ServerQueryAgent bindAgent = null;
+    #endregion
 
-    #region Unity Life Cycle
-    // Start is called before the first frame update
-    void Start()
+
+    #region Page UI Life Cycle
+    protected override void OnLoadPage(params object[] pars)
     {
-        var rect = GetComponent<RectTransform>();
-        rect.localScale = Vector3.one;
+        base.OnLoadPage(pars);
+        if (pars.Length != 0)
+        {
+            bindAgent = pars[0] as L4D2ServerQueryAgent;
+            infoListUI.GeneratePlayerUIGroup(bindAgent);
+        }
+        exitButton.onClick.AddListener(OnExitPressed);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (bindAgent == null)
         {
@@ -54,32 +64,29 @@ public class ServerInfoDisplayUI : MonoBehaviour
                 posterImage.sprite = mapInfo.mapPosterImage;
                 mapIndexText.text = "地图：" + bindAgent.serverInfo.serverMap;
                 playerCountText.text = "玩家：" + bindAgent.serverInfo.players.ToString() + "/" + bindAgent.serverInfo.maxPlayers.ToString();
-
-
-                if (bindAgent.serverInfo.players == 0)
-                {
-                    playersNameText.text = "当前服务器暂无玩家！";
-                }
-                else
-                {
-                    string players = "";
-                    foreach (var c in bindAgent.playersInfo.playerInfos)
-                    {
-                        var name = c.name.Replace("\0", "");//Remove '\0'
-                        players += name;
-                        players += "\n";
-                    }
-                    if (players.Length >= 1)
-                        players = players.Substring(0, players.Length - 1);
-                    playersNameText.text = players;
-                }
+                ipAddressText.text = "IP地址：" + bindAgent.ip + ":" + bindAgent.port.ToString();
             }
         }
     }
+
+    protected override void OnDestroyPage()
+    {
+        base.OnDestroyPage();
+        bindAgent = null;
+        infoListUI.DestroyPlayerUIGroup();
+        exitButton.onClick.RemoveListener(OnExitPressed);
+
+        serverNameText.text = "";
+        mapCNNameText.text = "";
+        posterImage.sprite = defaultPosterImage;
+        mapIndexText.text = "地图：";
+        playerCountText.text = "玩家：";
+        ipAddressText.text = "IP地址：";
+    }
     #endregion
 
-    public void BindAgent(L4D2ServerQueryAgent agent)
+    void OnExitPressed()
     {
-        this.bindAgent = agent;
+        PageUIManager.Instance.GoBack();
     }
 }
