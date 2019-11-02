@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class PageUIMain : PageUIBase
 {
+    [Header("UI Settings")]
     public ServerInfoDisplayUIManager serverUIContainer;
-    public Button settingButton;
+    public Button ipSettingButton;
+    public Button specialCareSettingsButton;
+    public Button motdButton;
     public string ipSettingsPage;
+    public string specialCareSettingsPage;
+    public string motdPage;
     protected override void OnLoadPage(params object[] pars)
     {
         base.OnLoadPage(pars);
@@ -17,7 +22,10 @@ public class PageUIMain : PageUIBase
             L4D2QueryAgentManager.Instance.StartQuery(serverList);//Create Query Agents
             serverUIContainer.GenerateUIGroup(L4D2QueryAgentManager.Instance.agents);//Generate UI Group
         }
-        settingButton.onClick.AddListener(OnSettingsPressed);
+        ipSettingButton.onClick.AddListener(OnIPSettingsPressed);
+        specialCareSettingsButton.onClick.AddListener(OnSpecialCareSettingsPressed);
+        motdButton.onClick.AddListener(OnMOTDPressed);
+        VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
     }
 
     public override void OnResume()
@@ -31,22 +39,40 @@ public class PageUIMain : PageUIBase
             serverUIContainer.DestroyUIGroup();
             IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
         }
+        VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
     }
 
     protected override void OnDestroyPage()
     {
         base.OnDestroyPage();
-        settingButton.onClick.RemoveListener(OnSettingsPressed);
+        ipSettingButton.onClick.RemoveListener(OnIPSettingsPressed);
+        specialCareSettingsButton.onClick.RemoveListener(OnSpecialCareSettingsPressed);
+        motdButton.onClick.RemoveListener(OnMOTDPressed);
     }
 
-    void OnSettingsPressed()
+    void OnIPSettingsPressed()
     {
         PageUIManager.Instance.LoadPageByPageName(ipSettingsPage);
+    }
+
+    void OnSpecialCareSettingsPressed()
+    {
+        PageUIManager.Instance.LoadPageByPageName(specialCareSettingsPage);
+    }
+
+    void OnMOTDPressed()
+    {
+        PageUIManager.Instance.LoadPageByPageName(motdPage);
     }
 
     void OnReceiveServerInfoList(List<IPData> list, bool remoteQuerySucceed)
     {
         L4D2QueryAgentManager.Instance.StartQuery(list);//Create Query Agents
         serverUIContainer.GenerateUIGroup(L4D2QueryAgentManager.Instance.agents);//Generate UI Group
+    }
+
+    void OnReceiveVipIDList(List<IDDecorator> list, bool remoteQuerySucceed)
+    {
+        PlayerIDManager.Instance.BuildVipIDTable(list);
     }
 }

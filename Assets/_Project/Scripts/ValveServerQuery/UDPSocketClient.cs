@@ -56,12 +56,9 @@ namespace ValveServerQuery
                 messageThread = new Thread(RecieveMessage);
                 messageThreadFlag = true;
                 messageThread.Start();
-
-                Debug.Log("连接服务器成功");
             }
             catch
             {
-                Debug.Log("连接服务器失败");
                 return;
             }
         }

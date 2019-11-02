@@ -2,6 +2,7 @@
 	Properties{
 		_MainTex("Font Texture", 2D) = "white" {}
 		_Color("Text Color", Color) = (1,1,1,1)
+		_ColorMask("Text Color", Color) = (1,1,1,1)
 		_OutlineColor("Outline Color", Color) = (0,0,0,1)
 		_StencilComp("Stencil Comparison", Float) = 3.000000
 		 _Stencil("Stencil ID", Float) = 1.000000

@@ -33,6 +33,8 @@ public class ServerInfoDisplayItem : MonoBehaviour
         coverButton.onClick.AddListener(OnEnterDetailInfo);
     }
 
+    string lastCheckMapName;
+    MapContentMapper.MapInfoItem mapInfo;
     // Update is called once per frame
     void Update()
     {
@@ -53,7 +55,13 @@ public class ServerInfoDisplayItem : MonoBehaviour
                 infoLayer.SetActive(false);
 
                 serverNameText.text = bindAgent.serverInfo.serverName;
-                MapContentMapper.MapInfoItem mapInfo = MapContentMapper.Instance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+
+                if (lastCheckMapName != bindAgent.serverInfo.serverMap)
+                {
+                    mapInfo = MapContentMapper.Instance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+                    lastCheckMapName = bindAgent.serverInfo.serverMap;
+                }
+
                 mapCNNameText.text = mapInfo.mapCNName;
                 posterImage.sprite = mapInfo.mapPosterImage;
                 mapIndexText.text = "地图：" + bindAgent.serverInfo.serverMap;
@@ -84,7 +92,7 @@ public class ServerInfoDisplayItem : MonoBehaviour
                     foreach (var c in bindAgent.playersInfo.playerInfos)
                     {
                         var name = c.name.Replace("\0", "");//Remove '\0'
-                        players += name;
+                        players += PlayerIDManager.Instance.DecoratePlayerID(name);
                         players += "\n";
                     }
                     if (players.Length >= 1)

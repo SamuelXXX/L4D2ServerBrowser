@@ -44,6 +44,10 @@ public class IPRecordItem : MonoBehaviour
     public void BindIPRecord(IPData connectInfo)
     {
         bindConnectInfo = connectInfo;
+        if (bindConnectInfo != null)
+        {
+            ipDisplayField.text = bindConnectInfo.ip + ":" + bindConnectInfo.port.ToString();
+        }
     }
     #endregion
 }

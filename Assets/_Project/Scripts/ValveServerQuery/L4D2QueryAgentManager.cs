@@ -25,7 +25,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
     // Start is called before the first frame update
     void Start()
     {
-
+        Application.targetFrameRate = 60;
     }
 
     bool offline = false;

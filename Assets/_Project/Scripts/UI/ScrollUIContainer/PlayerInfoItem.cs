@@ -63,7 +63,7 @@ public class PlayerInfoItem : MonoBehaviour
                 SetBackgroundColor();
             }
 
-            idText.text = playerInfo.name;
+            idText.text = PlayerIDManager.Instance.DecoratePlayerID(playerInfo.name.Replace("\0", ""));
             scoreText.text = playerInfo.score.ToString();
             TimePeriod p = new TimePeriod(Mathf.FloorToInt(playerInfo.duration));
 
