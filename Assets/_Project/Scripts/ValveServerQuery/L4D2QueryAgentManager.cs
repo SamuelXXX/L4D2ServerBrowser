@@ -85,7 +85,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
     #endregion
 
     #region Agents Management
-    void CreateAgentGroup(List<IPData> serverConnectInfos)
+    void CreateAgentGroup(List<IPData> ipDatas)
     {
         foreach (var a in agents)
         {
@@ -93,7 +93,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
         }
         agents.Clear();
 
-        foreach (var s in serverConnectInfos)
+        foreach (var s in ipDatas)
         {
             var go = Instantiate(agentPrefab.gameObject);
             var agent = go.GetComponent<L4D2ServerQueryAgent>();
