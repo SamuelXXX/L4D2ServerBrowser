@@ -20,6 +20,8 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
     [System.NonSerialized]
     public List<L4D2ServerQueryAgent> agents = new List<L4D2ServerQueryAgent>();
 
+
+
     #region Unity Life Cycle
     // Start is called before the first frame update
     void Start()
@@ -27,12 +29,35 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
 
     }
 
+    bool offline = false;
     // Update is called once per frame
     void Update()
     {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            offline = true;
+        }
+        else if (offline)//Reconnect
+        {
+            offline = false;
+            ReconnectAllAgents();
+        }
+    }
 
+    private void OnApplicationPause(bool pause)
+    {
+        if (!pause)
+        {
+            ReconnectAllAgents();
+        }
+        else
+        {
+            DisconnectAllAgents();
+        }
     }
     #endregion
+
+    
 
     public void StartQuery(List<ServerConnectInfo> serverInfo)
     {
@@ -88,6 +113,22 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
             DestroyImmediate(a.gameObject);
         }
         agents.Clear();
+    }
+
+    void ReconnectAllAgents()
+    {
+        foreach (var a in agents)
+        {
+            a.StartQuerySession(a.ip, a.port);
+        }
+    }
+
+    void DisconnectAllAgents()
+    {
+        foreach (var a in agents)
+        {
+            a.StopQuerySession();
+        }
     }
     #endregion
 }

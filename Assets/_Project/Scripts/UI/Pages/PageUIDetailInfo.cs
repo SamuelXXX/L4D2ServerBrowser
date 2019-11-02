@@ -14,19 +14,18 @@ public class PageUIDetailInfo : PageUIBase
     public Text mapIndexText;
     public Text playerCountText;
     public Text ipAddressText;
+    public Text statusText;
 
     public GameObject infoLayer;
     public Text infoText;
     public Button exitButton;
 
     public PlayerInfoUIManager infoListUI;
-
     #endregion
 
     #region Runtime Data
     L4D2ServerQueryAgent bindAgent = null;
     #endregion
-
 
     #region Page UI Life Cycle
     protected override void OnLoadPage(params object[] pars)
@@ -38,9 +37,10 @@ public class PageUIDetailInfo : PageUIBase
             infoListUI.GeneratePlayerUIGroup(bindAgent);
         }
         exitButton.onClick.AddListener(OnExitPressed);
+        UpdateUI();
     }
 
-    private void Update()
+    void UpdateUI()
     {
         if (bindAgent == null)
         {
@@ -49,14 +49,28 @@ public class PageUIDetailInfo : PageUIBase
         }
         else
         {
-            if (!bindAgent.Connected || string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
+            if (string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
             {
                 infoLayer.SetActive(true);
-                infoText.text = "正在连接...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
+                infoText.text = "正在等待服务器响应...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
             }
             else
             {
                 infoLayer.SetActive(false);
+
+                switch (bindAgent.status)
+                {
+                    case L4D2ServerAgentStatus.NotInitialized:
+                        statusText.text = "<color=red>未初始化</color>";
+                        break;
+                    case L4D2ServerAgentStatus.OK:
+                        statusText.text = "";
+                        break;
+                    case L4D2ServerAgentStatus.NotResponding:
+                        statusText.text = "<color=red>未响应</color>";
+                        break;
+                    default: break;
+                }
 
                 serverNameText.text = bindAgent.serverInfo.serverName;
                 MapContentMapper.MapInfoItem mapInfo = MapContentMapper.Instance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
@@ -67,6 +81,11 @@ public class PageUIDetailInfo : PageUIBase
                 ipAddressText.text = "IP地址：" + bindAgent.ip + ":" + bindAgent.port.ToString();
             }
         }
+    }
+
+    private void Update()
+    {
+        UpdateUI();
     }
 
     protected override void OnDestroyPage()

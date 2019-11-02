@@ -13,6 +13,7 @@ public class ServerInfoDisplayUI : MonoBehaviour
     public Text mapIndexText;
     public Text playerCountText;
     public Text playersNameText;
+    public Text statusText;
     public Button moreInfoButton;
     public Button coverButton;
 
@@ -44,10 +45,10 @@ public class ServerInfoDisplayUI : MonoBehaviour
         }
         else
         {
-            if (!bindAgent.Connected || string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
+            if (string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
             {
                 infoLayer.SetActive(true);
-                infoText.text = "正在连接...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
+                infoText.text = "正在等待服务器响应...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
             }
             else
             {
@@ -59,6 +60,20 @@ public class ServerInfoDisplayUI : MonoBehaviour
                 posterImage.sprite = mapInfo.mapPosterImage;
                 mapIndexText.text = "地图：" + bindAgent.serverInfo.serverMap;
                 playerCountText.text = "玩家：" + bindAgent.serverInfo.players.ToString() + "/" + bindAgent.serverInfo.maxPlayers.ToString();
+
+                switch (bindAgent.status)
+                {
+                    case L4D2ServerAgentStatus.NotInitialized:
+                        statusText.text = "<color=red>未初始化</color>";
+                        break;
+                    case L4D2ServerAgentStatus.OK:
+                        statusText.text = "";
+                        break;
+                    case L4D2ServerAgentStatus.NotResponding:
+                        statusText.text = "<color=red>未响应</color>";
+                        break;
+                    default: break;
+                }
 
 
                 if (bindAgent.serverInfo.players == 0)

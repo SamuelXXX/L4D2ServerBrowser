@@ -18,40 +18,11 @@ namespace ValveServerQuery
         #endregion
 
         #region Runtime Data
-        protected bool connected = false;
-
-        public bool IsConnected
-        {
-            get
-            {
-                return connected;
-            }
-            private set
-            {
-                if (connected != value)
-                {
-                    connected = value;
-                    if (connected)
-                    {
-                        OnlineHandler?.Invoke(IP, Port);
-                    }
-                    else
-                    {
-                        OfflineHandler?.Invoke(IP, Port);
-                    }
-                }
-            }
-        }
-
         public Action<ByteBuffer> MessageHandler;
-        public Action<string, int> OnlineHandler;
-        public Action<string, int> OfflineHandler;
-
 
         private byte[] receiveBuffer;
         private Socket clientSocket;
         private Thread messageThread;
-        private Thread connectThread;
 
         Queue<ByteBuffer> receivedDataQueue = new Queue<ByteBuffer>();
         #endregion
@@ -63,19 +34,17 @@ namespace ValveServerQuery
             this.Port = port;
             this.ReceiveBufferSize = recSize;
 
-            connectThread = new Thread(ConnectServerThreadBody);
-            connectThread.Start();
+            ConnectServer();
         }
 
-        void ConnectServerThreadBody()
+        void ConnectServer()
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//Valve Server Query use udp protocol
             IPAddress mIp = IPAddress.Parse(IP);
             IPEndPoint ip_end_point = new IPEndPoint(mIp, Port);
             try
             {
-                clientSocket.Connect(ip_end_point);
-                IsConnected = true;
+                clientSocket.Connect(ip_end_point);//UDP has no connection
 
                 receiveBuffer = new byte[ReceiveBufferSize];
 
@@ -92,7 +61,6 @@ namespace ValveServerQuery
             }
             catch
             {
-                IsConnected = false;
                 Debug.Log("连接服务器失败");
                 return;
             }
@@ -102,8 +70,6 @@ namespace ValveServerQuery
         #region Async Message Processing
         public void AsyncProcessingMessage()
         {
-            if (!IsConnected)
-                return;
             lock (receivedDataQueue)
             {
                 while (receivedDataQueue.Count != 0)
@@ -116,34 +82,17 @@ namespace ValveServerQuery
         #endregion
 
         #region Socket Operation
-        public void ManualConnect()
-        {
-            if (connected || connectThread.IsAlive)//Connected or Connecting
-                return;
-
-            if (connectThread != null)
-            {
-                connectThread.Abort();
-            }
-            connectThread = new Thread(ConnectServerThreadBody);
-            connectThread.Start();
-        }
-
         public void Close()
         {
             messageThreadFlag = false;
 
             if (clientSocket == null) return;
 
-            IsConnected = false;
-            //clientSocket.Disconnect(false);
-            clientSocket.Shutdown(SocketShutdown.Both);
             clientSocket.Close();
             clientSocket.Dispose();
 
             clientSocket = null;
         }
-
         #endregion
 
         #region Data Sending
@@ -154,12 +103,6 @@ namespace ValveServerQuery
 
         public void SendMessage(byte[] data)
         {
-            if (IsConnected == false)
-            {
-                Debug.LogWarning("Cannot Send Message when Socket is closed");
-                return;
-            }
-
             try
             {
                 clientSocket.Send(data);
@@ -168,8 +111,6 @@ namespace ValveServerQuery
             {
                 Debug.LogError(ex.Message);
                 Debug.Log("Closing Socket------" + IP + ":" + Port.ToString());
-                IsConnected = false;
-                clientSocket.Shutdown(SocketShutdown.Both);
                 clientSocket.Close();
                 clientSocket.Dispose();
             }
@@ -203,14 +144,12 @@ namespace ValveServerQuery
                 }
                 catch (Exception ex)
                 {
-                    IsConnected = false;
                     Debug.LogError(ex.Message);
                     Debug.Log("Closing Socket------" + IP + ":" + Port.ToString());
                     if (clientSocket != null)
                     {
                         lock (clientSocket)
                         {
-                            clientSocket.Shutdown(SocketShutdown.Both);
                             clientSocket.Close();
                             clientSocket.Dispose();
                         }
