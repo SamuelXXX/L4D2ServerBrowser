@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ServerInfoDisplayUI : MonoBehaviour
+public class ServerInfoDisplayItem : MonoBehaviour
 {
     #region UI Settings
     [Header("UI Component Reference")]
@@ -23,8 +23,6 @@ public class ServerInfoDisplayUI : MonoBehaviour
     [Header("Page Settings")]
     public string detailPage;
     #endregion
-
-    protected L4D2ServerQueryAgent bindAgent;
 
     #region Unity Life Cycle
     // Start is called before the first frame update
@@ -98,6 +96,7 @@ public class ServerInfoDisplayUI : MonoBehaviour
     }
     #endregion
 
+    protected L4D2ServerQueryAgent bindAgent;
     public void BindAgent(L4D2ServerQueryAgent agent)
     {
         this.bindAgent = agent;

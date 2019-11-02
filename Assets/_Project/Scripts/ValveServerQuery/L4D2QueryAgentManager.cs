@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ServerConnectInfo
+public class IPData
 {
     public string ip;
     public ushort port;
 }
 
-public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
+public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
 {
+    #region Settings
     [PowerInspector.PowerList(Key = "ip")]
-    public List<ServerConnectInfo> serverConnectInfos = new List<ServerConnectInfo>();
+    public List<IPData> serverIPInfos = new List<IPData>();
     public L4D2ServerQueryAgent agentPrefab;
-    public float timeGap = 1f;
-
+    public float queryTimeGap = 1f;
 
     [System.NonSerialized]
     public List<L4D2ServerQueryAgent> agents = new List<L4D2ServerQueryAgent>();
-
-
+    #endregion
 
     #region Unity Life Cycle
     // Start is called before the first frame update
@@ -57,11 +56,10 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
     }
     #endregion
 
-    
-
-    public void StartQuery(List<ServerConnectInfo> serverInfo)
+    #region Query API
+    public void StartQuery(List<IPData> serverInfo)
     {
-        serverConnectInfos = serverInfo;
+        serverIPInfos = serverInfo;
         CreateAgentGroup(serverInfo);
         StartCoroutine(QueryRoutine());
     }
@@ -70,23 +68,24 @@ public class QueryAgentManager : ShortLifeSingleton<QueryAgentManager>
     {
         StopCoroutine("QueryRoutine");
         DestroyAgentGroup();
-        serverConnectInfos = null;
+        serverIPInfos = null;
     }
 
     IEnumerator QueryRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(timeGap);
+            yield return new WaitForSeconds(queryTimeGap);
             foreach (var a in agents)
             {
                 a.PerformServerQuery();
             }
         }
     }
+    #endregion
 
     #region Agents Management
-    void CreateAgentGroup(List<ServerConnectInfo> serverConnectInfos)
+    void CreateAgentGroup(List<IPData> serverConnectInfos)
     {
         foreach (var a in agents)
         {

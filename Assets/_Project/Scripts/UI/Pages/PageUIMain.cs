@@ -13,9 +13,9 @@ public class PageUIMain : PageUIBase
         base.OnLoadPage(pars);
         if (pars.Length == 1)
         {
-            List<ServerConnectInfo> serverList = pars[0] as List<ServerConnectInfo>;
-            QueryAgentManager.Instance.StartQuery(serverList);//Create Query Agents
-            serverUIContainer.GenerateUIGroup(QueryAgentManager.Instance.agents);//Generate UI Group
+            List<IPData> serverList = pars[0] as List<IPData>;
+            L4D2QueryAgentManager.Instance.StartQuery(serverList);//Create Query Agents
+            serverUIContainer.GenerateUIGroup(L4D2QueryAgentManager.Instance.agents);//Generate UI Group
         }
         settingButton.onClick.AddListener(OnSettingsPressed);
     }
@@ -27,9 +27,9 @@ public class PageUIMain : PageUIBase
         {
             PageUIIPSettings.ipDirty = false;
 
-            QueryAgentManager.Instance.StopQuery();
+            L4D2QueryAgentManager.Instance.StopQuery();
             serverUIContainer.DestroyUIGroup();
-            ServerInfoLibraryManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
+            IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
         }
     }
 
@@ -44,9 +44,9 @@ public class PageUIMain : PageUIBase
         PageUIManager.Instance.LoadPageByPageName(ipSettingsPage);
     }
 
-    void OnReceiveServerInfoList(List<ServerConnectInfo> list, bool remoteQuerySucceed)
+    void OnReceiveServerInfoList(List<IPData> list, bool remoteQuerySucceed)
     {
-        QueryAgentManager.Instance.StartQuery(list);//Create Query Agents
-        serverUIContainer.GenerateUIGroup(QueryAgentManager.Instance.agents);//Generate UI Group
+        L4D2QueryAgentManager.Instance.StartQuery(list);//Create Query Agents
+        serverUIContainer.GenerateUIGroup(L4D2QueryAgentManager.Instance.agents);//Generate UI Group
     }
 }

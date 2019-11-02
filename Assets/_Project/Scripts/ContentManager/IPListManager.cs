@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 /// Managing the server ip:port library for querying
 /// Two types of ip source, remote configure file and local config file
 /// </summary>
-public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryManager>
+public class IPListManager : ShortLifeSingleton<IPListManager>
 {
     #region Settings
     public string ipLibraryUrl;
@@ -29,10 +29,10 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
     #endregion
 
     #region Exposed API
-    protected List<ServerConnectInfo> serverConnectInfoCache = new List<ServerConnectInfo>();
-    protected Action<List<ServerConnectInfo>, bool> contentReadyHandler;
+    protected List<IPData> serverConnectInfoCache = new List<IPData>();
+    protected Action<List<IPData>, bool> contentReadyHandler;
     bool inCommitingProcess = false;
-    public void CommitServerInfoRequest(Action<List<ServerConnectInfo>, bool> onContentReadyHandler)
+    public void CommitServerInfoRequest(Action<List<IPData>, bool> onContentReadyHandler)
     {
         if (inCommitingProcess)
         {
@@ -85,7 +85,7 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
     }
 
     bool inLocalEditingMode = false;
-    public List<ServerConnectInfo> localServerInfoEditingCache;
+    public List<IPData> localServerInfoEditingCache;
 
     public void EnterLocalEditingMode()
     {
@@ -97,7 +97,7 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
     }
 
     bool dataDirty = false;
-    public ServerConnectInfo AppendIPRecord(string ip, ushort port)
+    public IPData AppendIPRecord(string ip, ushort port)
     {
         if (!inLocalEditingMode)
             return null;
@@ -107,7 +107,7 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
             return null;
         }
 
-        ServerConnectInfo sci = new ServerConnectInfo();
+        IPData sci = new IPData();
         sci.ip = ip;
         sci.port = port;
         localServerInfoEditingCache.Add(sci);
@@ -115,7 +115,7 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
         return sci;
     }
 
-    public void DeleteIPRecord(ServerConnectInfo s)
+    public void DeleteIPRecord(IPData s)
     {
         if (!inLocalEditingMode)
             return;
@@ -137,9 +137,9 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
     #endregion
 
     #region Tool Methods
-    List<ServerConnectInfo> StringToServerConnectInfos(string s)
+    List<IPData> StringToServerConnectInfos(string s)
     {
-        List<ServerConnectInfo> serverInfos = new List<ServerConnectInfo>();
+        List<IPData> serverInfos = new List<IPData>();
 
         string[] records = s.Split('\n');
         foreach (var c in records)
@@ -156,7 +156,7 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
                 continue;
             }
 
-            ServerConnectInfo connectInfo = new ServerConnectInfo();
+            IPData connectInfo = new IPData();
             connectInfo.ip = ip.Trim();
             connectInfo.port = ushort.Parse(port);
 
@@ -166,7 +166,7 @@ public class ServerInfoLibraryManager : ShortLifeSingleton<ServerInfoLibraryMana
         return serverInfos;
     }
 
-    string ServerConnectInfosToString(List<ServerConnectInfo> serverConnectInfos)
+    string ServerConnectInfosToString(List<IPData> serverConnectInfos)
     {
         if (serverConnectInfos == null)
             return "";

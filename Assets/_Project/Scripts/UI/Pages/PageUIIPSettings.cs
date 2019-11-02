@@ -21,7 +21,7 @@ public class PageUIIPSettings : PageUIBase
     protected override void OnLoadPage(params object[] pars)
     {
         base.OnLoadPage(pars);
-        ServerInfoLibraryManager.Instance.EnterLocalEditingMode();
+        IPListManager.Instance.EnterLocalEditingMode();
         ipRecordManager.GenerateUIGroup();
         addButton.onClick.AddListener(OnAddButtonClicked);
         exitButton.onClick.AddListener(OnExitButtonClicked);
@@ -37,7 +37,7 @@ public class PageUIIPSettings : PageUIBase
         exitButton.onClick.RemoveListener(OnExitButtonClicked);
         ipConfirmButton.onClick.RemoveListener(OnIPConfirmButtonClicked);
         ipCancelButton.onClick.RemoveListener(OnIPCancelButtonClicked);
-        ipDirty = ServerInfoLibraryManager.Instance.ExitLocalEditingMode();
+        ipDirty = IPListManager.Instance.ExitLocalEditingMode();
     }
 
     void OnAddButtonClicked()
@@ -55,7 +55,7 @@ public class PageUIIPSettings : PageUIBase
     void OnIPConfirmButtonClicked()
     {
         ipInputWindow.SetActive(false);
-        ipRecordManager.AddRecordUI(ServerInfoLibraryManager.Instance.AppendIPRecord(ipField.text, ushort.Parse(portField.text)));
+        ipRecordManager.AddRecordUI(IPListManager.Instance.AppendIPRecord(ipField.text, ushort.Parse(portField.text)));
     }
 
     void OnExitButtonClicked()

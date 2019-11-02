@@ -24,9 +24,7 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     public float notRespondingThreashold = 3f;
     protected float lastRespondTime;
 
-
     public PowerButton button = new PowerButton("查询服务器", "PerformServerQuery", 30f);
-
     #endregion
 
     #region Runtime Data

@@ -4,33 +4,20 @@ using UnityEngine;
 
 public class PlayerInfoUIManager : MonoBehaviour
 {
+    #region Data
     public PlayerInfoItem uiPrefab;
     protected List<PlayerInfoItem> playerInfoItems = new List<PlayerInfoItem>();
-    // Start is called before the first frame update
-    void Start()
-    {
+    #endregion
 
-    }
-
+    #region Unity Life Cycle
     // Update is called once per frame
     void Update()
     {
-        List<ValveServerQuery.ValveServerResponseData.PlayerInfo> playerInfos = new List<ValveServerQuery.ValveServerResponseData.PlayerInfo>(queryAgent.playersInfo.playerInfos);
-        playerInfos.Sort((a, b) => { return b.score - a.score; });
-
-        for (int i = 0; i < playerInfoItems.Count; i++)
-        {
-            if (i < playerInfos.Count)
-            {
-                playerInfoItems[i].UpdateContent(playerInfos[i]);
-            }
-            else
-            {
-                playerInfoItems[i].UpdateContent(null);
-            }
-        }
+        UpdateUIContents();
     }
+    #endregion
 
+    #region UI Operation
     protected L4D2ServerQueryAgent queryAgent;
     public void GeneratePlayerUIGroup(L4D2ServerQueryAgent agent)
     {
@@ -47,6 +34,8 @@ public class PlayerInfoUIManager : MonoBehaviour
             ui.BindIndex(i);
             playerInfoItems.Add(ui);
         }
+
+        UpdateUIContents();
     }
 
     public void DestroyPlayerUIGroup()
@@ -58,4 +47,23 @@ public class PlayerInfoUIManager : MonoBehaviour
 
         playerInfoItems.Clear();
     }
+
+    void UpdateUIContents()
+    {
+        List<ValveServerQuery.ValveServerResponseData.PlayerInfo> playerInfos = new List<ValveServerQuery.ValveServerResponseData.PlayerInfo>(queryAgent.playersInfo.playerInfos);
+        playerInfos.Sort((a, b) => { return b.score - a.score; });
+
+        for (int i = 0; i < playerInfoItems.Count; i++)
+        {
+            if (i < playerInfos.Count)
+            {
+                playerInfoItems[i].UpdateContent(playerInfos[i]);
+            }
+            else
+            {
+                playerInfoItems[i].UpdateContent(null);
+            }
+        }
+    }
+    #endregion
 }

@@ -6,8 +6,8 @@ public class ServerInfoDisplayUIManager : MonoBehaviour
 {
     public RectTransform leftLayout;
     public RectTransform rightLayout;
-    public ServerInfoDisplayUI uiPrefab;
-    protected List<ServerInfoDisplayUI> managedDisplayUI = new List<ServerInfoDisplayUI>();
+    public ServerInfoDisplayItem uiPrefab;
+    protected List<ServerInfoDisplayItem> managedDisplayUI = new List<ServerInfoDisplayItem>();
 
     #region Unity Life Cycle
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class ServerInfoDisplayUIManager : MonoBehaviour
         {
             var go = Instantiate(uiPrefab.gameObject);
             go.SetActive(true);
-            var ui = go.GetComponent<ServerInfoDisplayUI>();
+            var ui = go.GetComponent<ServerInfoDisplayItem>();
             ui.GetComponent<RectTransform>().SetParent(curLayout, true);
             if (curLayout == leftLayout)
             {

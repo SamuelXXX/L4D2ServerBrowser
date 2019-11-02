@@ -24,7 +24,7 @@ public class PageUIQueryServerList : PageUIBase
         continueButton.onClick.AddListener(OnContinueButtonPressed);
         refreshButton.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
-        ServerInfoLibraryManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
+        IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
     }
 
     protected override void OnDestroyPage()
@@ -38,7 +38,7 @@ public class PageUIQueryServerList : PageUIBase
     #region UI Button Callbacks
     void OnRefreshButtonPressed()
     {
-        ServerInfoLibraryManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
+        IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
     }
 
     void OnContinueButtonPressed()
@@ -47,8 +47,8 @@ public class PageUIQueryServerList : PageUIBase
     }
     #endregion
 
-    List<ServerConnectInfo> receiveServerList;
-    void OnReceiveServerInfoList(List<ServerConnectInfo> list, bool remoteQuerySucceed)
+    List<IPData> receiveServerList;
+    void OnReceiveServerInfoList(List<IPData> list, bool remoteQuerySucceed)
     {
         if (remoteQuerySucceed)
         {

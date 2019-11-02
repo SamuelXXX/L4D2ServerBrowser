@@ -4,32 +4,35 @@ using UnityEngine;
 
 public class IPRecordManager : MonoBehaviour
 {
-    public IPRecord uiPrefab;
+    #region Data
+    public IPRecordItem uiPrefab;
+    protected List<IPRecordItem> ipRecords = new List<IPRecordItem>();
+    #endregion
 
-    protected List<IPRecord> ipRecords = new List<IPRecord>();
+    #region UI Management
     public void GenerateUIGroup()
     {
         DestroyUIGroup();
-        foreach (var r in ServerInfoLibraryManager.Instance.localServerInfoEditingCache)
+        foreach (var r in IPListManager.Instance.localServerInfoEditingCache)
         {
             AddRecordUI(r);
         }
     }
 
-    public void AddRecordUI(ServerConnectInfo info)
+    public void AddRecordUI(IPData info)
     {
         if (info == null)
             return;
 
         var go = Instantiate(uiPrefab.gameObject);
-        var ui = go.GetComponent<IPRecord>();
+        var ui = go.GetComponent<IPRecordItem>();
         ui.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>(), true);
         ui.transform.localScale = Vector3.one;
         ui.BindIPRecord(info);
         ipRecords.Add(ui);
     }
 
-    public void RemoveRecordUI(IPRecord r)
+    public void RemoveRecordUI(IPRecordItem r)
     {
         ipRecords.Remove(r);
     }
@@ -43,4 +46,5 @@ public class IPRecordManager : MonoBehaviour
 
         ipRecords.Clear();
     }
+    #endregion
 }
