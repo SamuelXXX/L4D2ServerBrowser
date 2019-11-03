@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class PageUIMain : PageUIBase
 {
-    [Header("UI Settings")]
+    #region Settings
+    [Header("UI Component Reference")]
     public ServerInfoDisplayUIManager serverUIContainer;
     public Button ipSettingButton;
     public Button specialCareSettingsButton;
     public Button motdButton;
+
+    [Header("Page Settings")]
     public string ipSettingsPage;
     public string specialCareSettingsPage;
     public string motdPage;
+    #endregion
+
+    #region Page UI Callbacks
     protected override void OnLoadPage(params object[] pars)
     {
         base.OnLoadPage(pars);
@@ -34,10 +40,7 @@ public class PageUIMain : PageUIBase
         if (PageUIIPSettings.ipDirty)
         {
             PageUIIPSettings.ipDirty = false;
-
-            L4D2QueryAgentManager.Instance.StopQuery();
-            serverUIContainer.DestroyUIGroup();
-            IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
+            RefreshPage();
         }
         VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
     }
@@ -49,7 +52,23 @@ public class PageUIMain : PageUIBase
         specialCareSettingsButton.onClick.RemoveListener(OnSpecialCareSettingsPressed);
         motdButton.onClick.RemoveListener(OnMOTDPressed);
     }
+    #endregion
 
+    #region Internal Tool Methods
+    void RefreshPage()
+    {
+        L4D2QueryAgentManager.Instance.StopQuery();
+        serverUIContainer.DestroyUIGroup();
+        IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
+    }
+
+    void RequestForVipID()
+    {
+        VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
+    }
+    #endregion
+
+    #region Page Jumping
     void OnIPSettingsPressed()
     {
         PageUIManager.Instance.LoadPageByPageName(ipSettingsPage);
@@ -64,7 +83,9 @@ public class PageUIMain : PageUIBase
     {
         PageUIManager.Instance.LoadPageByPageName(motdPage);
     }
+    #endregion
 
+    #region External Data Source Response Handler
     void OnReceiveServerInfoList(List<IPData> list, bool remoteQuerySucceed)
     {
         L4D2QueryAgentManager.Instance.StartQuery(list);//Create Query Agents
@@ -75,4 +96,5 @@ public class PageUIMain : PageUIBase
     {
         PlayerIDManager.Instance.BuildVipIDTable(list);
     }
+    #endregion
 }

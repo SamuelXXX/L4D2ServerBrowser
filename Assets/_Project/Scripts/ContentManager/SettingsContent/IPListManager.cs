@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using System.Net;
 
 /// <summary>
 /// Managing the server ip:port library for querying
@@ -95,13 +96,19 @@ public class IPListManager : ShortLifeSingleton<IPListManager>
         localServerInfoEditingCache = StringToServerConnectInfos(ReadLocalConfig());
     }
 
+    public bool CheckIPValidation(string ip)
+    {
+        IPAddress address = null;
+        return IPAddress.TryParse(ip, out address);
+    }
+
     bool dataDirty = false;
     public IPData AppendIPRecord(string ip, ushort port)
     {
         if (!inLocalEditingMode)
             return null;
 
-        if (!ipRegex.IsMatch(ip))
+        if (!CheckIPValidation(ip))
         {
             return null;
         }

@@ -39,11 +39,12 @@ namespace ValveServerQuery
 
         void ConnectServer()
         {
-            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//Valve Server Query use udp protocol
-            IPAddress mIp = IPAddress.Parse(IP);
-            IPEndPoint ip_end_point = new IPEndPoint(mIp, Port);
+            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//Valve Server Query use udp protocol        
             try
             {
+                IPAddress mIp = IPAddress.Parse(IP);
+                IPEndPoint ip_end_point = new IPEndPoint(mIp, Port);
+
                 clientSocket.Connect(ip_end_point);//UDP has no connection
 
                 receiveBuffer = new byte[ReceiveBufferSize];

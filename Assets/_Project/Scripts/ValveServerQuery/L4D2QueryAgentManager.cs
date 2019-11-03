@@ -35,6 +35,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             offline = true;
+            DisconnectAllAgents();
         }
         else if (offline)//Reconnect
         {
@@ -57,18 +58,38 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
     #endregion
 
     #region Query API
+    bool isQuerying = false;
     public void StartQuery(List<IPData> serverInfo)
     {
+        if (isQuerying)
+        {
+            StopQuery();
+        }
+
+        isQuerying = true;
         serverIPInfos = serverInfo;
         CreateAgentGroup(serverInfo);
         StartCoroutine(QueryRoutine());
     }
 
+    public void PauseQuery()
+    {
+        if (isQuerying)
+            StopAllCoroutines();
+    }
+
+    public void ReusmeQuery()
+    {
+        if (isQuerying)
+            StartCoroutine(QueryRoutine());
+    }
+
     public void StopQuery()
     {
-        StopCoroutine("QueryRoutine");
+        StopAllCoroutines();
         DestroyAgentGroup();
         serverIPInfos = null;
+        isQuerying = false;
     }
 
     IEnumerator QueryRoutine()
@@ -101,7 +122,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
             go.transform.parent = transform;
             go.name = "Agent-->" + s.ip + ":" + s.port.ToString();
 
-            agent.StartQuerySession(s.ip, s.port);
+            agent.Connect(s.ip, s.port);
         }
     }
 
@@ -118,7 +139,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
     {
         foreach (var a in agents)
         {
-            a.StartQuerySession(a.ip, a.port);
+            a.Connect();
         }
     }
 
@@ -126,7 +147,7 @@ public class L4D2QueryAgentManager : ShortLifeSingleton<L4D2QueryAgentManager>
     {
         foreach (var a in agents)
         {
-            a.StopQuerySession();
+            a.Disconnect();
         }
     }
     #endregion

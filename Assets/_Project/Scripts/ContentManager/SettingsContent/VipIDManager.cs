@@ -138,7 +138,6 @@ public class VipIDManager : ShortLifeSingleton<VipIDManager>
             StreamReader reader = new StreamReader(filePath);
             string s = reader.ReadToEnd();
             reader.Close();
-            Debug.Log("Read Local Special Care Lib:" + s);
             return s;
         }
     }

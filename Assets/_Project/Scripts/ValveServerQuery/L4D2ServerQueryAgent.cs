@@ -7,7 +7,8 @@ using System;
 
 public enum L4D2ServerAgentStatus
 {
-    NotInitialized = 0,
+    Offline = 0,
+    WaitForChallengeNumber,
     OK,
     NotResponding
 }
@@ -20,7 +21,7 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     public bool autoStart;
 
     [RuntimeData]
-    public L4D2ServerAgentStatus status = L4D2ServerAgentStatus.NotInitialized;
+    public L4D2ServerAgentStatus status = L4D2ServerAgentStatus.Offline;
     public float notRespondingThreashold = 3f;
     protected float lastRespondTime;
 
@@ -44,7 +45,7 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     {
         if (autoStart)
         {
-            StartQuerySession(ip, port);
+            Connect(ip, port);
         }
     }
 
@@ -63,37 +64,77 @@ public class L4D2ServerQueryAgent : MonoBehaviour
 
     private void OnDestroy()
     {
-        client.Close();
+        if (client != null)
+            client.Close();
     }
     #endregion
 
     #region Exposed API
-    public void StartQuerySession(string ip, int port)
+    /// <summary>
+    /// In fact there is no connection in UDP 
+    /// </summary>
+    /// <param name="ip"></param>
+    /// <param name="port"></param>
+    public void Connect(string ip, int port)
     {
         this.ip = ip;
         this.port = port;
-        if (client != null)
-            client.Close();
+        Connect();
+    }
 
-        status = L4D2ServerAgentStatus.OK;
+    /// <summary>
+    /// Create new socket
+    /// </summary>
+    public void Connect()
+    {
+        if (client != null)
+        {
+            client.Close();
+            StopAllCoroutines();
+        }
+
+        status = L4D2ServerAgentStatus.WaitForChallengeNumber;
         lastRespondTime = Time.time;
         client = new ValveServerQueryClient(ip, port);
         client.MessageHandler += OnReceiveMessage;
+        StartCoroutine(ChallengeNumberAcquireRoutine());
     }
 
-    public void StopQuerySession()
+    /// <summary>
+    /// Dispose socket
+    /// </summary>
+    public void Disconnect()
     {
         if (client != null)
             client.Close();
 
-        status = L4D2ServerAgentStatus.NotInitialized;
+        status = L4D2ServerAgentStatus.Offline;
         client = null;
+        StopAllCoroutines();
+    }
+
+    IEnumerator ChallengeNumberAcquireRoutine()
+    {
+        while (status == L4D2ServerAgentStatus.WaitForChallengeNumber && client != null)
+        {
+            client.SendQueryMessage((byte)ValveServerRequestType.A2S_Player, -1);//Require for Challenge Number
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void PerformServerQuery()
     {
-        if (client != null)
+        StartCoroutine(PerformQueryRoutine());
+    }
+
+    IEnumerator PerformQueryRoutine()
+    {
+        if (client != null && status != L4D2ServerAgentStatus.WaitForChallengeNumber)
+        {
             client.SendQueryMessage((byte)ValveServerRequestType.A2S_Info, -1);
+            yield return new WaitForSeconds(0.1f);//Wait for 0.1 seconds to perform players query
+            client.SendQueryMessage((byte)ValveServerRequestType.A2S_Player, challengeNumberInfo.challengeNumber);
+        }
     }
     #endregion
 
@@ -101,16 +142,16 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     {
         status = L4D2ServerAgentStatus.OK;
         lastRespondTime = Time.time;
+
         ValveServerResponseData data = new ValveServerResponseData(buff);
+
         switch ((ValveServerResponseType)data.header)
         {
             case ValveServerResponseType.A2S_Info:
                 serverInfo = data.serverInfoBody;
-                client.SendQueryMessage((byte)ValveServerRequestType.A2S_Player, -1);
                 break;
             case ValveServerResponseType.A2S_ChallengeNumber:
                 challengeNumberInfo = data.challengeNumberBody;
-                client.SendQueryMessage((byte)ValveServerRequestType.A2S_Player, challengeNumberInfo.challengeNumber);
                 break;
             case ValveServerResponseType.A2S_Player:
                 playersInfo = data.playersInfoBody;

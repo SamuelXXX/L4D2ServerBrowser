@@ -60,8 +60,11 @@ public class PageUIDetailInfo : PageUIBase
 
                 switch (bindAgent.status)
                 {
-                    case L4D2ServerAgentStatus.NotInitialized:
-                        statusText.text = "<color=red>未初始化</color>";
+                    case L4D2ServerAgentStatus.Offline:
+                        statusText.text = "<color=red>客户端离线</color>";
+                        break;
+                    case L4D2ServerAgentStatus.WaitForChallengeNumber:
+                        statusText.text = "<color=red>检查服务器可用性</color>";
                         break;
                     case L4D2ServerAgentStatus.OK:
                         statusText.text = "";
