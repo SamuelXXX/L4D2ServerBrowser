@@ -4,6 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+#region Certificate Handler Defination
+public class AlwaysPassCertificateHandler : CertificateHandler
+{
+    protected override bool ValidateCertificate(byte[] certificateData)
+    {
+        return true;
+    }
+}
+#endregion
+
+
 public class WebRequestAgent : Singleton<WebRequestAgent>
 {
     #region Data Type Defination
@@ -32,9 +43,9 @@ public class WebRequestAgent : Singleton<WebRequestAgent>
     #endregion
 
     #region Web API
-    public void Post(string uri, WWWForm form, Action<WebResponseData> responseAction)
+    public void Post(string uri, WWWForm form, Action<WebResponseData> responseAction, CertificateHandler certificateHandler = null)
     {
-        StartCoroutine(PostRequestRoutine(uri, form, responseAction));
+        StartCoroutine(PostRequestRoutine(uri, form, responseAction, certificateHandler));
     }
 
     public string FormToString(WWWForm form)
@@ -48,12 +59,13 @@ public class WebRequestAgent : Singleton<WebRequestAgent>
         return retValue;
     }
 
-    IEnumerator PostRequestRoutine(string uri, WWWForm form, Action<WebResponseData> responseAction)
+    IEnumerator PostRequestRoutine(string uri, WWWForm form, Action<WebResponseData> responseAction, CertificateHandler certificateHandler)
     {
         UnityWebRequest post = UnityWebRequest.Post(uri, form);
         Debug.Log("PostRequest:<color=green>" + uri + "</color>");
 
         Debug.Log("PostBody:<color=green>" + FormToString(form) + "</color>");
+        post.certificateHandler = certificateHandler;
         yield return post.SendWebRequest();
 
         if (post.isHttpError)
@@ -96,16 +108,19 @@ public class WebRequestAgent : Singleton<WebRequestAgent>
         }
     }
 
-    public void Get(string uri, Action<WebResponseData> responseAction)
+    public void Get(string uri, Action<WebResponseData> responseAction, CertificateHandler certificateHandler = null)
     {
-        StartCoroutine(GetRequestRoutine(uri, responseAction));
+        StartCoroutine(GetRequestRoutine(uri, responseAction, certificateHandler));
     }
 
-    IEnumerator GetRequestRoutine(string uri, Action<WebResponseData> responseAction)
+
+    IEnumerator GetRequestRoutine(string uri, Action<WebResponseData> responseAction, CertificateHandler certificateHandler)
     {
         UnityWebRequest get = UnityWebRequest.Get(uri);
         Debug.Log("Get Request:" + uri);
+        get.certificateHandler = certificateHandler;
         yield return get.SendWebRequest();
+
 
         if (get.isHttpError)
         {
