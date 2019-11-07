@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class PageUIMessageOfTheDay : PageUIBase
 {
     #region Settings
-    public string contentUrl;
-
     [Header("UI Reference")]
     public Text contentText;
     public Button backButton;
@@ -18,7 +16,7 @@ public class PageUIMessageOfTheDay : PageUIBase
         base.OnLoadPage(pars);
         backButton.onClick.AddListener(OnExitButtonClicked);
         contentText.text = "内容加载中...";
-        WebRequestAgent.Instance.Get(contentUrl, OnReceiveMOTDContent);
+        WebRequestAgent.Instance.Get(RCUrlManager.Instance.settings.urlMotd, OnReceiveMOTDContent);
     }
 
     protected override void OnDestroyPage()

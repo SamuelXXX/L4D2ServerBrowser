@@ -14,7 +14,6 @@ using System.Net;
 public class IPListManager : ShortLifeSingleton<IPListManager>
 {
     #region Settings
-    public string ipLibraryUrl;
     public string localIPConfigFile = "IPLib.txt";
 
     protected Regex ipRegex = new Regex(@"^(\d{1,3}.){3}\d{1,3}$");
@@ -44,7 +43,7 @@ public class IPListManager : ShortLifeSingleton<IPListManager>
         inCommitingProcess = true;
         ipDataCache.Clear();
         contentReadyHandler = onContentReadyHandler;
-        WebRequestAgent.Instance.Get(ipLibraryUrl, OnReceiveIPLibraryResponse);
+        WebRequestAgent.Instance.Get(RCUrlManager.Instance.settings.urlIpList, OnReceiveIPLibraryResponse);
     }
     #endregion
 

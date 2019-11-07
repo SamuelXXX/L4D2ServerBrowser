@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44f5165ab080a846a5b72587e499f8e, type: 3}
-  m_Name: WebAPISettings
+  m_Script: {fileID: 11500000, guid: 1363aeaf5dfde7f4f950b7fc4fe2dfa3, type: 3}
+  m_Name: kkjoc
   m_EditorClassIdentifier: 
-  webAPI: []
+  urlIpList: http://120.27.1.226/L4D2ServerBrowser/kkjoc/Ip.txt
+  urlVipIDList: http://120.27.1.226/L4D2ServerBrowser/kkjoc/VipID.txt
+  urlMotd: http://120.27.1.226/L4D2ServerBrowser/kkjoc/Motd.txt

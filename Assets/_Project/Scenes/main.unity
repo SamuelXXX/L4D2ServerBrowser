@@ -798,7 +798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b936d3c686d3b84caa404c6acc05d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipLibraryUrl: http://120.27.1.226/L4D2/Ip.txt
   localIPConfigFile: IPLib.txt
   localServerInfoEditingCache: []
 --- !u!1 &72869708
@@ -2010,6 +2009,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286419596}
   m_CullTransparentMesh: 0
+--- !u!1 &299526803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 299526805}
+  - component: {fileID: 299526804}
+  m_Layer: 0
+  m_Name: RCUrlManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &299526804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299526803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacb59cab06577e43bbd7d374ea9afaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: e0c9357c15c7d0f449ab7d884a6549ec, type: 2}
+--- !u!4 &299526805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299526803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &331100356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,7 +2735,6 @@ MonoBehaviour:
   pageId: 2469
   isWindow: 1
   killWindowIfGoBack: 0
-  contentUrl: http://120.27.1.226/L4D2/Motd.txt
   contentText: {fileID: 1262715416}
   backButton: {fileID: 1661953535}
 --- !u!114 &465717265
@@ -5157,7 +5199,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1075758375
 GameObject:
@@ -9934,7 +9976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100c082b29beee742b44b1aa84387715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vipLibraryUrl: http://120.27.1.226/L4D2/VipID.txt
   localSpecialCareConfigFile: SpecialCareLib.txt
   idDataCache: []
   localSpecialCareEditingCache: []

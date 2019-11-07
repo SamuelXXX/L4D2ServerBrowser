@@ -37,7 +37,6 @@ public class IDDecorator
 public class VipIDManager : ShortLifeSingleton<VipIDManager>
 {
     #region Settings
-    public string vipLibraryUrl;
     public string localSpecialCareConfigFile = "SpecialCareLib.txt";
     #endregion
 
@@ -69,7 +68,7 @@ public class VipIDManager : ShortLifeSingleton<VipIDManager>
         idDataCache.Clear();
         contentReadyHandler = onContentReadyHandler;
         if (cloudVipCache.Count == 0)
-            WebRequestAgent.Instance.Get(vipLibraryUrl, OnReceiveVipIDLibraryResponse);
+            WebRequestAgent.Instance.Get(RCUrlManager.Instance.settings.urlVipIDList, OnReceiveVipIDLibraryResponse);
         else
         {
             idDataCache.AddRange(cloudVipCache);
