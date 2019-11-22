@@ -230,4 +230,11 @@ public class PageUIManager : ShortLifeSingleton<PageUIManager>
         }
     }
     #endregion
+
+    [ContextMenu("Capture Screen")]
+    public void CaptureScreen()
+    {
+        ScreenCapture.CaptureScreenshot("截取全屏.png", 0);
+        Debug.Log(1);
+    }
 }
