@@ -11,17 +11,13 @@ public class NotifyCenter : ShortLifeSingleton<NotifyCenter>
     // Start is called before the first frame update
     void Start()
     {
+        IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
         CommitNotifySubscribersRequest();
         PlayerIDManager.Instance.OnPlayerLoginAction += OnNewPlayerLogin;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
     #endregion
 
-    #region Remote Settings
+    #region Remote Notify Settings
     bool inCommitingProcess = false;
 
     public NotifySubcriberSettings notifySubscriberSettings = null;
@@ -75,13 +71,20 @@ public class NotifyCenter : ShortLifeSingleton<NotifyCenter>
     }
     #endregion
 
+    #region Server Info List
+    void OnReceiveServerInfoList(List<IPData> list, bool remoteQuerySucceed)
+    {
+        L4D2QueryAgentManager.Instance.StartQuery(list);//Create Query Agents
+    }
+    #endregion
+
     #region Email Operation
     void SendEMailToSubScriber(PlayerIDRunningData data, NotifySubscriberBody subscriber)
     {
         string subject = subscriber.notifySubjectTemplate.Replace("[INTEREST]", data.id);
         string body = subscriber.notifyBodyTemplate.Replace("[NAME]", subscriber.subscriberName);
         body = body.Replace("[INTEREST]", data.id);
-        body = body.Replace("[SERVER]", data.serverName.Replace("\0",""));
+        body = body.Replace("[SERVER]", data.serverName.Replace("\0", ""));
         SendQQMail(subscriber.subscriberMail, subject, body);
     }
 
@@ -119,13 +122,4 @@ public class NotifyCenter : ShortLifeSingleton<NotifyCenter>
         }
     }
     #endregion
-
-    private void OnGUI()
-    {
-        Rect r = new Rect(0, 0, 200, 100);
-        if(GUI.Button(r,"刷新订阅信息"))
-        {
-            CommitNotifySubscribersRequest();
-        }
-    }
 }
