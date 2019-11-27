@@ -8,4 +8,5 @@ public class RCUrlSettings : ScriptableObject
     public string urlIpList;
     public string urlVipIDList;
     public string urlMotd;
+    public string urlNotifySubscribers;
 }

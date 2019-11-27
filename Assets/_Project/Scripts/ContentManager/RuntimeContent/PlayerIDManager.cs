@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ public class PlayerIDManager : ShortLifeSingleton<PlayerIDManager>
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -33,19 +35,33 @@ public class PlayerIDManager : ShortLifeSingleton<PlayerIDManager>
     }
 
     public List<PlayerIDRunningData> collectedPlayerData = new List<PlayerIDRunningData>();
+
     void CollectPlayersRuntimeData()
     {
+        HashSet<string> nameHash = new HashSet<string>();
+        foreach (var c in collectedPlayerData)
+        {
+            if (!string.IsNullOrEmpty(c.id))
+                nameHash.Add(c.id);
+        }
+
         collectedPlayerData.Clear();
         foreach (var a in L4D2QueryAgentManager.Instance.agents)
         {
             var serverName = a.serverInfo.serverName;
             foreach (var p in a.playersInfo.playerInfos)
             {
-                collectedPlayerData.Add(new PlayerIDRunningData(p.name.Replace("\0", ""), serverName, p.duration));
+                var d = new PlayerIDRunningData(p.name.Replace("\0", ""), serverName, p.duration);
+                collectedPlayerData.Add(d);
+                if (!nameHash.Contains(d.id) && !string.IsNullOrEmpty(d.id) && d.gamingTime < 90f)//Need to check play time to determine login action
+                {
+                    OnPlayerLoginAction?.Invoke(d);
+                }
             }
         }
     }
 
+    public Action<PlayerIDRunningData> OnPlayerLoginAction;
     #endregion
 
     #region Exposed API
