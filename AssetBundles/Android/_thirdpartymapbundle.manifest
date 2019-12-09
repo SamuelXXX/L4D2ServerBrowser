@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 2660017979
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 72fe88013b1d92f1c937217faa444810
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0d006afb78c7deae2e02b1de5aab5322
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: b7194e22af5bf6c4a9db9da0ff79be15, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/farewell_chenming.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/MapInfo.asset
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/yama.png
+Dependencies: []

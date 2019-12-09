@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7194e22af5bf6c4a9db9da0ff79be15, type: 3}
+  m_Name: MapInfo
+  m_EditorClassIdentifier: 
+  thirdPartyInfo:
+    mapCNName: 
+    mapPosterImage: {fileID: 0}
+    mapCheckExp: 
+  mapInfos:
+  - mapCNName: "\u518D\u89C1\u4E86\u6668\u8317"
+    mapPosterImage: {fileID: 21300000, guid: 7b312004739767447bb34b0fec83d812, type: 3}
+    mapCheckExp: ^msd
+  - mapCNName: "\u6469\u8036\u5C71\u5371\u673A"
+    mapPosterImage: {fileID: 21300000, guid: 573b4ac83b2554145b61feaee81088c3, type: 3}
+    mapCheckExp: ^l4d_yama

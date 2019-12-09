@@ -7,12 +7,18 @@ using System.Text.RegularExpressions;
 [CreateAssetMenu(fileName = "MapInfo", menuName = "MapInfo")]
 public class MapContentMapper : ScriptableObject
 {
-    public static MapContentMapper Instance
+    public static MapContentMapper OfficialInstance
     {
         get
         {
             return Resources.Load<MapContentMapper>("MapInfo");
         }
+    }
+
+    public static MapContentMapper ThirdPartyInstance
+    {
+        get;
+        set;
     }
 
     [System.Serializable]

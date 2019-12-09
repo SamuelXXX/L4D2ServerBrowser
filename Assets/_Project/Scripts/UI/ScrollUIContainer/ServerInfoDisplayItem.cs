@@ -45,7 +45,7 @@ public class ServerInfoDisplayItem : MonoBehaviour
         }
         else
         {
-            
+
             if (bindAgent.status != L4D2ServerAgentStatus.OK)
             {
                 infoLayer.SetActive(true);
@@ -76,7 +76,11 @@ public class ServerInfoDisplayItem : MonoBehaviour
 
                 if (lastCheckMapName != bindAgent.serverInfo.serverMap)
                 {
-                    mapInfo = MapContentMapper.Instance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+                    if (MapContentMapper.ThirdPartyInstance != null)
+                        mapInfo = MapContentMapper.ThirdPartyInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+
+                    if (string.IsNullOrEmpty(mapInfo.mapCNName))
+                        mapInfo = MapContentMapper.OfficialInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
                     lastCheckMapName = bindAgent.serverInfo.serverMap;
                 }
 

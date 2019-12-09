@@ -76,7 +76,14 @@ public class PageUIDetailInfo : PageUIBase
                 }
 
                 serverNameText.text = bindAgent.serverInfo.serverName;
-                MapContentMapper.MapInfoItem mapInfo = MapContentMapper.Instance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+
+                MapContentMapper.MapInfoItem mapInfo = null;
+                if (MapContentMapper.ThirdPartyInstance != null)
+                    mapInfo = MapContentMapper.ThirdPartyInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+
+                if (string.IsNullOrEmpty(mapInfo.mapCNName))
+                    mapInfo = MapContentMapper.OfficialInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+
                 mapCNNameText.text = mapInfo.mapCNName;
                 posterImage.sprite = mapInfo.mapPosterImage;
                 mapIndexText.text = "地图：" + bindAgent.serverInfo.serverMap;
