@@ -45,7 +45,25 @@ public class ServerInfoDisplayItem : MonoBehaviour
         }
         else
         {
-            if (string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
+            
+            if (bindAgent.status != L4D2ServerAgentStatus.OK)
+            {
+                infoLayer.SetActive(true);
+                switch (bindAgent.status)
+                {
+                    case L4D2ServerAgentStatus.Offline:
+                        infoText.text = "客户端无法访问网络";
+                        break;
+                    case L4D2ServerAgentStatus.WaitForChallengeNumber:
+                        infoText.text = "正在等待服务器响应...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
+                        break;
+                    case L4D2ServerAgentStatus.NotResponding:
+                        infoText.text = "服务器未响应";
+                        break;
+                    default: break;
+                }
+            }
+            else if (string.IsNullOrEmpty(bindAgent.serverInfo.serverName))
             {
                 infoLayer.SetActive(true);
                 infoText.text = "正在等待服务器响应...\n" + bindAgent.ip + ":" + bindAgent.port.ToString();
@@ -66,23 +84,7 @@ public class ServerInfoDisplayItem : MonoBehaviour
                 posterImage.sprite = mapInfo.mapPosterImage;
                 mapIndexText.text = "地图：" + bindAgent.serverInfo.serverMap;
                 playerCountText.text = "玩家：" + bindAgent.serverInfo.players.ToString() + "/" + bindAgent.serverInfo.maxPlayers.ToString();
-
-                switch (bindAgent.status)
-                {
-                    case L4D2ServerAgentStatus.Offline:
-                        statusText.text = "<color=red>客户端离线</color>";
-                        break;
-                    case L4D2ServerAgentStatus.WaitForChallengeNumber:
-                        statusText.text = "<color=red>检查服务器可用性</color>";
-                        break;
-                    case L4D2ServerAgentStatus.OK:
-                        statusText.text = "";
-                        break;
-                    case L4D2ServerAgentStatus.NotResponding:
-                        statusText.text = "<color=red>未响应</color>";
-                        break;
-                    default: break;
-                }
+                statusText.text = "";
 
 
                 if (bindAgent.serverInfo.players == 0)

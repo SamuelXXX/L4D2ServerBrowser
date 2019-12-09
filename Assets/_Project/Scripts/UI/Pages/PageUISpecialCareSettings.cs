@@ -11,6 +11,7 @@ public class PageUISpecialCareSettings : PageUIBase
     public Button exitButton;
     public GameObject idInputWindow;
     public InputField idField;
+    public Text hintText;
 
     public Button idConfirmButton;
     public Button idCancelButton;
@@ -39,10 +40,19 @@ public class PageUISpecialCareSettings : PageUIBase
         VipIDManager.Instance.ExitLocalEditingMode();
     }
 
+    private void Update()
+    {
+        if (!idInputWindow.gameObject.activeSelf)
+            UpdateHintText();
+        else
+            hintText.gameObject.SetActive(false);
+    }
+
     void OnAddButtonClicked()
     {
         idInputWindow.SetActive(true);
         idField.text = "";
+        hintText.gameObject.SetActive(false);
     }
 
     void OnIDCancelButtonClicked()
@@ -59,5 +69,17 @@ public class PageUISpecialCareSettings : PageUIBase
     void OnExitButtonClicked()
     {
         PageUIManager.Instance.GoBack();
+    }
+
+    void UpdateHintText()
+    {
+        if (VipIDManager.Instance.localSpecialCareEditingCache.Count == 0)
+        {
+            hintText.gameObject.SetActive(true);
+        }
+        else
+        {
+            hintText.gameObject.SetActive(false);
+        }
     }
 }

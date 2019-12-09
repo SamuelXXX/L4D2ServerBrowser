@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MapInfo
   m_EditorClassIdentifier: 
   thirdPartyInfo:
-    mapCNName: "\u4E09\u65B9\u56FE"
+    mapCNName: "\u672A\u77E5\u7B2C\u4E09\u65B9\u5730\u56FE"
     mapPosterImage: {fileID: 21300000, guid: 5ed4232a00783fb4faa4cd916d7df890, type: 3}
     mapCheckExp: 
   mapInfos:
@@ -51,7 +51,7 @@ MonoBehaviour:
     mapPosterImage: {fileID: 21300000, guid: df93bfb923c3a544aa862ac61b04e787, type: 3}
     mapCheckExp: ^[Cc]11m
   - mapCNName: "\u8840\u8165\u6536\u83B7"
-    mapPosterImage: {fileID: 21300000, guid: a14be9afcce542443bc97d29720404bc, type: 3}
+    mapPosterImage: {fileID: 21300000, guid: 46bfa06647208cb4c9b45eba27cf3bd2, type: 3}
     mapCheckExp: ^[Cc]12m
   - mapCNName: "\u523A\u9AA8\u5BD2\u6EAA"
     mapPosterImage: {fileID: 21300000, guid: 4a521f812125f8c43a3c0a54dca274f6, type: 3}

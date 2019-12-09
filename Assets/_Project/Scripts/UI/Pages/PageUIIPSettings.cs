@@ -15,6 +15,7 @@ public class PageUIIPSettings : PageUIBase
     public InputField portField;
     public Button ipConfirmButton;
     public Button ipCancelButton;
+    public Text hintText;
     public IPRecordManager ipRecordManager;
     #endregion
 
@@ -40,6 +41,14 @@ public class PageUIIPSettings : PageUIBase
         ipDirty = IPListManager.Instance.ExitLocalEditingMode();
     }
 
+    private void Update()
+    {
+        if (!ipInputWindow.gameObject.activeSelf)
+            UpdateHintText();
+        else
+            hintText.gameObject.SetActive(false);
+    }
+
     void OnAddButtonClicked()
     {
         ipInputWindow.SetActive(true);
@@ -61,5 +70,17 @@ public class PageUIIPSettings : PageUIBase
     void OnExitButtonClicked()
     {
         PageUIManager.Instance.GoBack();
+    }
+
+    void UpdateHintText()
+    {
+        if (IPListManager.Instance.localServerInfoEditingCache.Count == 0)
+        {
+            hintText.gameObject.SetActive(true);
+        }
+        else
+        {
+            hintText.gameObject.SetActive(false);
+        }
     }
 }
