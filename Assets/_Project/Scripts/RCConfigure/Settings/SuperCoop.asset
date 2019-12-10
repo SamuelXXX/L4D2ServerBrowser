@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   urlIpList: http://120.27.1.226/L4D2ServerBrowser/SuperCoop/Ip.txt
   urlVipIDList: http://120.27.1.226/L4D2ServerBrowser/SuperCoop/VipID.txt
-  urlMotd: http://120.27.1.226/L4D2ServerBrowser/SuperCoop/Motd.txt
+  urlMotd: http://120.27.1.226/L4D2ServerBrowser/SuperCoop/html/Motd.html
   urlNotifySubscribers: http://120.27.1.226/L4D2ServerBrowser/SuperCoop/NotifySubscribers.txt

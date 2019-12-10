@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PageUIMessageOfTheDay : PageUIBase
+public class PageUIWebPageContainer : PageUIBase
 {
+    #region Settings
+    [Header("Web Page Setting")]
+    public string webPageUrl;
+    public BackButtonAction backAction;
+    #endregion
+
     #region Internal Methods
     protected List<PageIndex> GetAllPages()
     {
@@ -31,7 +36,7 @@ public class PageUIMessageOfTheDay : PageUIBase
         InAppBrowserProxy.Instance.UnregisterAllOnCloseHandlers();
         InAppBrowserProxy.Instance.RegisterOnCloseHandler(OnBrowserClosed);
 
-        InAppBrowserProxy.Instance.OpenBrowser(RCUrlManager.Instance.settings.urlMotd, null, OnWebPageSuccessfullyLoaded);
+        InAppBrowserProxy.Instance.OpenBrowser(webPageUrl, null, OnWebPageSuccessfullyLoaded);
 
         StartCoroutine(BrowserCloseDetectRoutine());
     }
@@ -73,7 +78,16 @@ public class PageUIMessageOfTheDay : PageUIBase
     {
         if (!closed)
         {
-            PageUIManager.Instance.GoBack();
+            switch (backAction)
+            {
+                case BackButtonAction.GoBack:
+                    PageUIManager.Instance.GoBack();
+                    break;
+                case BackButtonAction.QuitApp:
+                    PageUIManager.Instance.GoBack();
+                    break;
+                default: break;
+            }
         }
         closed = true;
     }

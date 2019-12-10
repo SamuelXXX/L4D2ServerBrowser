@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ThirdPartyMapManager : ShortLifeSingleton<ThirdPartyMapManager>
+public class TPMPosterManager : ShortLifeSingleton<TPMPosterManager>
 {
     #region Definations
     public class AssetBundleDownloadResult
