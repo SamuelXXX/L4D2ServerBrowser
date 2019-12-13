@@ -23,3 +23,6 @@ MonoBehaviour:
   - mapCNName: "\u6469\u8036\u5C71\u5371\u673A"
     mapPosterImage: {fileID: 21300000, guid: 573b4ac83b2554145b61feaee81088c3, type: 3}
     mapCheckExp: ^l4d_yama
+  - mapCNName: "\u91CD\u8FD4\u6821\u56ED"
+    mapPosterImage: {fileID: 21300000, guid: c8e133b6a8dd554428cc559503d94100, type: 3}
+    mapCheckExp: ^l4d2_bts0
