@@ -1686,7 +1686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 166.25616, y: -86.399994}
+  m_AnchoredPosition: {x: 166.25, y: -86.399994}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237102531
@@ -4562,7 +4562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6c5e53be892304eb92f23304853ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appVersion: 2.0
+  appVersion: 2.1
   urlAppUpdateConfigPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/AppUpdateConfig.txt
 --- !u!1 &798615170
 GameObject:
@@ -7633,7 +7633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 498.7685, y: -86.399994}
+  m_AnchoredPosition: {x: 498.76562, y: -86.399994}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355865622
