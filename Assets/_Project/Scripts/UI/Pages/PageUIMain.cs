@@ -16,12 +16,16 @@ public class PageUIMain : PageUIBase
     public string ipSettingsPage;
     public string specialCareSettingsPage;
     public string discoverPage;
+    public string appUpdate;
     #endregion
 
     #region Page UI Callbacks
     protected override void OnLoadPage(params object[] pars)
     {
         base.OnLoadPage(pars);
+        StopAllCoroutines();
+
+        StartCoroutine(AppUpdatePollingRoutine());
         if (pars.Length == 1)
         {
             List<IPData> serverList = pars[0] as List<IPData>;
@@ -51,6 +55,21 @@ public class PageUIMain : PageUIBase
         ipSettingButton.onClick.RemoveListener(OnIPSettingsPressed);
         specialCareSettingsButton.onClick.RemoveListener(OnSpecialCareSettingsPressed);
         discoverButton.onClick.RemoveListener(OnDiscoverPressed);
+    }
+    #endregion
+
+    #region APP Update Polling
+    IEnumerator AppUpdatePollingRoutine()
+    {
+        while (true)
+        {
+            if (AppUpdater.Instance.CheckNeedUpdate())
+            {
+                PageUIManager.Instance.LoadPageByPageName(appUpdate);
+                yield break;
+            }
+            yield return new WaitForSeconds(5f);
+        }
     }
     #endregion
 
