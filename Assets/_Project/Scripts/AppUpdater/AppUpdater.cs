@@ -208,43 +208,61 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     IEnumerator DownloadAPK(string apkDownloadPath)
     {
-        UnityWebRequest www = UnityWebRequest.Get(apkDownloadPath);
+        string path = Application.persistentDataPath + "/L4D2ServerBrowser.apk";
+        FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+        BinaryWriter bw = new BinaryWriter(fs);
 
-        www.SendWebRequest();
-
-        //下载需要更新的apk
+        ulong length = 0;
         while (true)
         {
-            downloadProgressHandler?.Invoke(www.downloadProgress);
-            if (www.isDone)
-            {
-                break;
-            }
-            yield return null;
-        }
+            UnityWebRequest www = UnityWebRequest.Get(apkDownloadPath);
+            www.SetRequestHeader("Range", "bytes=" + length + "-");
 
-        if (!string.IsNullOrEmpty(www.error))
-        {
-            downloadFailedHandler?.Invoke(www.error);
-            yield return null;
-        }
+            yield return www.SendWebRequest();
 
-        //将apk写入沙盒目录
-        string path = Application.persistentDataPath + "/L4D2ServerBrowser.apk";
+            string contentRange = www.GetResponseHeader("Content-Range");
+            Debug.Log("Content-Range:" + contentRange);
+            ContentRangeHandler crh = new ContentRangeHandler(contentRange);
+            length += www.downloadedBytes;
 
-        try
-        {
-            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
-            BinaryWriter bw = new BinaryWriter(fs);
+            downloadProgressHandler?.Invoke(crh.end / (float)crh.total);
+
             bw.Write(www.downloadHandler.data);
-            bw.Close();
-            fs.Close();
+
+            if (crh.IsFinalChunk())
+                break;
         }
-        catch (Exception ex)
-        {
-            Debug.LogError(ex);
-        }
+
+        bw.Close();
+        fs.Close();
+
+
         downloadSucceedHandler?.Invoke();
+    }
+
+    public class ContentRangeHandler
+    {
+        public int start;
+        public int end;
+        public int total;
+        public ContentRangeHandler(string responseHeader)
+        {
+            string[] pars = responseHeader.Split(' ', '-', '/');
+            if (pars.Length != 4)
+            {
+                Debug.LogError("Content Range Length Not Matched");
+                return;
+            }
+
+            start = int.Parse(pars[1]);
+            end = int.Parse(pars[2]);
+            total = int.Parse(pars[3]);
+        }
+
+        public bool IsFinalChunk()
+        {
+            return end == total - 1;
+        }
     }
 
     public void InstallNewVersionAPK()
