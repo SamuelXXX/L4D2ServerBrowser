@@ -1,5 +1,5 @@
 {
     "version": "2.0",
     "urlApkDownloadingPath": "http://120.27.1.226/L4D2ServerBrowser/AppUpdate/Android/L4D2ServerBrowser.apk",
-    "updateInfo": "更新消息"
+    "updateInfo": "最新版本2.0"
 }
