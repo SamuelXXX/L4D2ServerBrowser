@@ -231,7 +231,19 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
         //将apk写入沙盒目录
         string path = Application.persistentDataPath + "/L4D2ServerBrowser.apk";
-        File.WriteAllBytes(path, www.downloadHandler.data);
+
+        try
+        {
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            BinaryWriter bw = new BinaryWriter(fs);
+            bw.Write(www.downloadHandler.data);
+            bw.Close();
+            fs.Close();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(ex);
+        }
         downloadSucceedHandler?.Invoke();
     }
 
@@ -239,7 +251,7 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
     {
         AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
-        bool b = currentActivity.Call<bool>("installAPK", "file://"+Application.persistentDataPath + "/L4D2ServerBrowser.apk");//APK路径
+        bool b = currentActivity.Call<bool>("installAPK", Application.persistentDataPath + "/L4D2ServerBrowser.apk");//APK路径
 
     }
     #endregion

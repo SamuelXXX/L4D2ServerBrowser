@@ -23,11 +23,12 @@ public class PageUIMain : PageUIBase
     protected override void OnLoadPage(params object[] pars)
     {
         base.OnLoadPage(pars);
-        StopAllCoroutines();
-
-        StartCoroutine(AppUpdatePollingRoutine());
+        
         if (pars.Length == 1)
         {
+            StopAllCoroutines();
+            StartCoroutine(AppUpdatePollingRoutine());
+
             List<IPData> serverList = pars[0] as List<IPData>;
             L4D2QueryAgentManager.Instance.StartQuery(serverList);//Create Query Agents
             serverUIContainer.GenerateUIGroup(L4D2QueryAgentManager.Instance.agents);//Generate UI Group
