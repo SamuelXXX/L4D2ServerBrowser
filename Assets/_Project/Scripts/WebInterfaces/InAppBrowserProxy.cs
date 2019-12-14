@@ -119,7 +119,16 @@ public class InAppBrowserProxy : ShortLifeSingleton<InAppBrowserProxy>
     {
         InAppBrowser.DisplayOptions options = new InAppBrowser.DisplayOptions();
 
-        options.hidesTopBar = true;
+        options.backButtonText = "回到主页";
+        options.displayURLAsPageTitle = false;
+        options.barBackgroundColor = "#D1D1D1";
+        options.shouldStickToPortrait = true;
+
+
+        //options.hidesTopBar = true;
+        options.androidBackButtonCustomBehaviour = true;
+
+
 
         m_Bridge.onBrowserStartedLoading.RemoveAllListeners();
         m_Bridge.onBrowserFinishedLoading.RemoveAllListeners();
@@ -129,6 +138,7 @@ public class InAppBrowserProxy : ShortLifeSingleton<InAppBrowserProxy>
 
         if (finishLoadingAction != null)
             m_Bridge.onBrowserFinishedLoading.AddListener(finishLoadingAction);
+
 
         InAppBrowser.OpenURL(uri, options);
     }

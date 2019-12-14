@@ -10,12 +10,12 @@ public class PageUIMain : PageUIBase
     public ServerInfoDisplayUIManager serverUIContainer;
     public Button ipSettingButton;
     public Button specialCareSettingsButton;
-    public Button motdButton;
+    public Button discoverButton;
 
     [Header("Page Settings")]
     public string ipSettingsPage;
     public string specialCareSettingsPage;
-    public string motdPage;
+    public string discoverPage;
     #endregion
 
     #region Page UI Callbacks
@@ -30,7 +30,7 @@ public class PageUIMain : PageUIBase
         }
         ipSettingButton.onClick.AddListener(OnIPSettingsPressed);
         specialCareSettingsButton.onClick.AddListener(OnSpecialCareSettingsPressed);
-        motdButton.onClick.AddListener(OnMOTDPressed);
+        discoverButton.onClick.AddListener(OnDiscoverPressed);
         VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
     }
 
@@ -50,7 +50,7 @@ public class PageUIMain : PageUIBase
         base.OnDestroyPage();
         ipSettingButton.onClick.RemoveListener(OnIPSettingsPressed);
         specialCareSettingsButton.onClick.RemoveListener(OnSpecialCareSettingsPressed);
-        motdButton.onClick.RemoveListener(OnMOTDPressed);
+        discoverButton.onClick.RemoveListener(OnDiscoverPressed);
     }
     #endregion
 
@@ -79,9 +79,9 @@ public class PageUIMain : PageUIBase
         PageUIManager.Instance.LoadPageByPageName(specialCareSettingsPage);
     }
 
-    void OnMOTDPressed()
+    void OnDiscoverPressed()
     {
-        PageUIManager.Instance.LoadPageByPageName(motdPage);
+        PageUIManager.Instance.LoadPageByPageName(discoverPage);
     }
     #endregion
 

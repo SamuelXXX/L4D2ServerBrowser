@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PageUIMessageOfTheDay : PageUIBase
+public class PageUIDiscover : PageUIBase
 {
     #region Internal Methods
     protected List<PageIndex> GetAllPages()
@@ -31,7 +31,7 @@ public class PageUIMessageOfTheDay : PageUIBase
         InAppBrowserProxy.Instance.UnregisterAllOnCloseHandlers();
         InAppBrowserProxy.Instance.RegisterOnCloseHandler(OnBrowserClosed);
 
-        InAppBrowserProxy.Instance.OpenBrowser(RCUrlManager.Instance.settings.urlMotd, null, OnWebPageSuccessfullyLoaded);
+        InAppBrowserProxy.Instance.OpenBrowser(RCUrlManager.Instance.settings.urlDiscover, null, OnWebPageSuccessfullyLoaded);
 
         StartCoroutine(BrowserCloseDetectRoutine());
     }
