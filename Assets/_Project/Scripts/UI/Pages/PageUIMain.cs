@@ -23,20 +23,24 @@ public class PageUIMain : PageUIBase
     protected override void OnLoadPage(params object[] pars)
     {
         base.OnLoadPage(pars);
-        
+
         if (pars.Length == 1)
         {
+            TPMPosterManager.Instance.CommitThirdPartyMapRequest();
+
             StopAllCoroutines();
+            StartCoroutine(CommitRequestsRoutine());
             StartCoroutine(AppUpdatePollingRoutine());
 
             List<IPData> serverList = pars[0] as List<IPData>;
             L4D2QueryAgentManager.Instance.StartQuery(serverList);//Create Query Agents
             serverUIContainer.GenerateUIGroup(L4D2QueryAgentManager.Instance.agents);//Generate UI Group
         }
+
         ipSettingButton.onClick.AddListener(OnIPSettingsPressed);
         specialCareSettingsButton.onClick.AddListener(OnSpecialCareSettingsPressed);
         discoverButton.onClick.AddListener(OnDiscoverPressed);
-        VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
+
     }
 
     public override void OnResume()
@@ -75,6 +79,21 @@ public class PageUIMain : PageUIBase
     #endregion
 
     #region Internal Tool Methods
+    IEnumerator CommitRequestsRoutine()
+    {
+        while (true)
+        {
+            CommitRequests();
+            yield return new WaitForSeconds(10f);
+        }
+    }
+
+    void CommitRequests()
+    {
+        VipIDManager.Instance.CommitVipIDRequest(OnReceiveVipIDList);
+        AppUpdater.Instance.CommitAppUpdateRequest();
+    }
+
     void RefreshPage()
     {
         L4D2QueryAgentManager.Instance.StopQuery();

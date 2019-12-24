@@ -47,14 +47,6 @@ public class TPMPosterManager : ShortLifeSingleton<TPMPosterManager>
     }
     #endregion
 
-    #region Unity Life Cycle
-    // Start is called before the first frame update
-    void Start()
-    {
-        CommitThirdPartyMapRequest();
-    }
-    #endregion
-
     #region Exposed API
     bool inCommitingProcess = false;
 
@@ -112,7 +104,8 @@ public class TPMPosterManager : ShortLifeSingleton<TPMPosterManager>
 
     void OnRecieveThirdPartyMap(AssetBundleDownloadResult result)
     {
-        MapContentMapper.ThirdPartyInstance = result.bundle.LoadAsset<MapContentMapper>("MapInfo");
+        if (result.resultCode == AssetBundleDownloadResult.ResultCode.Succeed)
+            MapContentMapper.ThirdPartyInstance = result.bundle.LoadAsset<MapContentMapper>("MapInfo");
     }
     #endregion
 }

@@ -73,13 +73,12 @@ public class ServerInfoDisplayItem : MonoBehaviour
                 infoLayer.SetActive(false);
 
                 serverNameText.text = bindAgent.serverInfo.serverName;
-
                 if (lastCheckMapName != bindAgent.serverInfo.serverMap)
                 {
                     if (MapContentMapper.ThirdPartyInstance != null)
                         mapInfo = MapContentMapper.ThirdPartyInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
 
-                    if (string.IsNullOrEmpty(mapInfo.mapCNName))
+                    if (mapInfo == null || string.IsNullOrEmpty(mapInfo.mapCNName))
                         mapInfo = MapContentMapper.OfficialInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
                     lastCheckMapName = bindAgent.serverInfo.serverMap;
                 }

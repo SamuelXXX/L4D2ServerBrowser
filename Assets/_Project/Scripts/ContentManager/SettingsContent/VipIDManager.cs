@@ -54,7 +54,6 @@ public class VipIDManager : ShortLifeSingleton<VipIDManager>
     protected Action<List<IDDecorator>, bool> contentReadyHandler;
     bool inCommitingProcess = false;
 
-    protected List<IDDecorator> cloudVipCache = new List<IDDecorator>();
     public void CommitVipIDRequest(Action<List<IDDecorator>, bool> onContentReadyHandler)
     {
         if (inCommitingProcess)
@@ -67,17 +66,7 @@ public class VipIDManager : ShortLifeSingleton<VipIDManager>
         inCommitingProcess = true;
         idDataCache.Clear();
         contentReadyHandler = onContentReadyHandler;
-        if (cloudVipCache.Count == 0)
-            WebRequestAgent.Instance.Get(RCUrlManager.Instance.settings.urlVipIDList, OnReceiveVipIDLibraryResponse);
-        else
-        {
-            idDataCache.AddRange(cloudVipCache);
-
-            idDataCache.AddRange(StringToIDList(ReadLocalConfig()));
-            contentReadyHandler?.Invoke(idDataCache, true);
-            contentReadyHandler = null;
-            inCommitingProcess = false;
-        }
+        WebRequestAgent.Instance.Get(RCUrlManager.Instance.settings.urlVipIDList, OnReceiveVipIDLibraryResponse);
     }
     #endregion
 
@@ -212,7 +201,6 @@ public class VipIDManager : ShortLifeSingleton<VipIDManager>
         {
             serverQuerySucceed = true;
             idDataCache.AddRange(StringToIDList(data.text));
-            cloudVipCache = StringToIDList(data.text);
         }
 
         idDataCache.AddRange(StringToIDList(ReadLocalConfig()));

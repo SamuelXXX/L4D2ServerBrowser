@@ -38,6 +38,14 @@ public class PageUIQueryServerList : PageUIBase
     #region UI Button Callbacks
     void OnRefreshButtonPressed()
     {
+        infoText.text = "正在获取服务器列表...";
+        refreshButton.gameObject.SetActive(false);
+        continueButton.gameObject.SetActive(false);
+        Invoke("CommitIPListRequest", 1f);
+    }
+
+    void CommitIPListRequest()
+    {
         IPListManager.Instance.CommitServerInfoRequest(OnReceiveServerInfoList);
     }
 

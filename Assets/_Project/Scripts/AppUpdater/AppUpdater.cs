@@ -111,12 +111,6 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
     #endregion
 
     #region Unity Life Cycle
-    // Start is called before the first frame update
-    void Start()
-    {
-        WebRequestAgent.Instance.Get(urlAppUpdateConfigPath, OnReceiveAppUpdateData);
-    }
-
     private void OnValidate()
     {
 #if UNITY_EDITOR
@@ -124,6 +118,11 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 #endif
     }
     #endregion
+
+    public void CommitAppUpdateRequest()
+    {
+        WebRequestAgent.Instance.Get(urlAppUpdateConfigPath, OnReceiveAppUpdateData);
+    }
 
     void OnReceiveAppUpdateData(WebRequestAgent.WebResponseData data)
     {
@@ -135,9 +134,6 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
         config = JsonUtility.FromJson<AppUpdateConfig>(data.text);
     }
-
-
-
     #region Exposed API
 
     protected Action<float> downloadProgressHandler;
