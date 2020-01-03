@@ -23,9 +23,12 @@ MonoBehaviour:
   - mapCNName: "\u6469\u8036\u5C71\u5371\u673A"
     mapPosterImage: {fileID: 21300000, guid: 573b4ac83b2554145b61feaee81088c3, type: 3}
     mapCheckExp: ^l4d_yama
-  - mapCNName: "\u91CD\u8FD4\u6821\u56ED"
-    mapPosterImage: {fileID: 21300000, guid: c8e133b6a8dd554428cc559503d94100, type: 3}
-    mapCheckExp: ^l4d2_bts0
   - mapCNName: "\u5760\u5165\u6B7B\u4EA1"
     mapPosterImage: {fileID: 21300000, guid: f72bcd0669468bc46ad5ead0af1fe048, type: 3}
     mapCheckExp: ^l4d2_fallindeath
+  - mapCNName: "\u98A4\u6817\u68EE\u6797"
+    mapPosterImage: {fileID: 21300000, guid: 75b496fd98dbf6444b118998fdb601cb, type: 3}
+    mapCheckExp: ^hf0
+  - mapCNName: "\u76D0\u4E95\u5730\u72F1\u516C\u56ED"
+    mapPosterImage: {fileID: 21300000, guid: f9c6ee85d3ab9e749a593a26606a87e8, type: 3}
+    mapCheckExp: ^saltwell

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1921348215
+CRC: 1567943330
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b44bebcb0bcd4c067ce13808182fbabd
+    Hash: 5a2e1efa0180ba3a66f7dce21071649a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -19,8 +19,9 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/farewell_chenming.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/salthell.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/fallindeath.png
-- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/backtoschool.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/MapInfo.asset
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/yama.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/hauntedforest.png
 Dependencies: []
