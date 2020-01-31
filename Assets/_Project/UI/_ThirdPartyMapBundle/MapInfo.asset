@@ -32,3 +32,6 @@ MonoBehaviour:
   - mapCNName: "\u5DF4\u585E\u7F57\u90A3"
     mapPosterImage: {fileID: 21300000, guid: 150a5e388f4dacd4e9e672f184e61951, type: 3}
     mapCheckExp: ^(srocchurch)|(plaza_espana)|(maria_cristina)|(mnac)
+  - mapCNName: "\u6545\u4E61"
+    mapPosterImage: {fileID: 21300000, guid: aec095d4a60553a448e1d0c3433c1b1f, type: 3}
+    mapCheckExp: ^q_

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 168898053
+CRC: 2297271265
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6a2bd86a741fe81686d0fd9f8991b891
+    Hash: 5aa5c6a3d0b9548cba09cfa1fc17b030
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -19,6 +19,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/farewell_chenming.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/hometown.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/fallindeath.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/MapInfo.asset
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/warcelona.png
