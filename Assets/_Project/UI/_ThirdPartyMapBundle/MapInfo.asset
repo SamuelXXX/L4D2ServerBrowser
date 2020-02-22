@@ -35,3 +35,6 @@ MonoBehaviour:
   - mapCNName: "\u6545\u4E61"
     mapPosterImage: {fileID: 21300000, guid: aec095d4a60553a448e1d0c3433c1b1f, type: 3}
     mapCheckExp: ^q_
+  - mapCNName: "\u5929\u5802\u53EF\u5F852"
+    mapPosterImage: {fileID: 21300000, guid: a0af85e76cfc3684abb5be7f9dd2de47, type: 3}
+    mapCheckExp: ^(aircrash)|(rivermotel)|(outskirts)|(cityhall)|(bombshelter)|(AirCrash)|(RiverMotel)|(OutSkirts)|(CityHall)|(BombShelter)
