@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1955002624
+CRC: 474201759
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 71a921f49a132e75ec9678490a10f5fc
+    Hash: d5de78a3cd7a3f06b7d696a4e6f9b0ec
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -24,6 +24,7 @@ Assets:
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/fallindeath.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/MapInfo.asset
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/heavencanwait2.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/LastStand.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/warcelona.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/yama.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/daybreak.png

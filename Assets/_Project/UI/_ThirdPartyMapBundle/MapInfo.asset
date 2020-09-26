@@ -44,3 +44,6 @@ MonoBehaviour:
   - mapCNName: "\u7834\u6653"
     mapPosterImage: {fileID: 21300000, guid: 0f50a60baf1ec86429953db63c703ecb, type: 3}
     mapCheckExp: ^l4d2_daybreak
+  - mapCNName: "\u4E34\u6B7B\u4E00\u640F"
+    mapPosterImage: {fileID: 21300000, guid: 6fe8b4185a01c6345a56156975e6a919, type: 3}
+    mapCheckExp: ^[Cc]14m
