@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 474201759
+CRC: 851102351
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d5de78a3cd7a3f06b7d696a4e6f9b0ec
+    Hash: 53069e780365458b67f0d53305e205eb
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -26,7 +26,10 @@ Assets:
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/heavencanwait2.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/LastStand.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/warcelona.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/landofoblivion.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/yama.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/daybreak.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/bloodymoors.png
+- Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/lockdown.png
 - Assets/_Project/UI/_ThirdPartyMapBundle/ThirdPartyPosters/hauntedforest.png
 Dependencies: []

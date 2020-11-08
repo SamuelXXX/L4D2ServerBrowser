@@ -41,9 +41,18 @@ MonoBehaviour:
   - mapCNName: "\u767D\u68EE\u6797"
     mapPosterImage: {fileID: 21300000, guid: 2c478923643f17a4285812634d3e5fc7, type: 3}
     mapCheckExp: ^wfp
-  - mapCNName: "\u7834\u6653"
+  - mapCNName: "\u9ECE\u660E"
     mapPosterImage: {fileID: 21300000, guid: 0f50a60baf1ec86429953db63c703ecb, type: 3}
     mapCheckExp: ^l4d2_daybreak
   - mapCNName: "\u4E34\u6B7B\u4E00\u640F"
     mapPosterImage: {fileID: 21300000, guid: 6fe8b4185a01c6345a56156975e6a919, type: 3}
     mapCheckExp: ^[Cc]14m
+  - mapCNName: "\u8840\u8165\u8352\u91CE"
+    mapPosterImage: {fileID: 21300000, guid: 1f984bab120e6cf488983c5b60eeafbf, type: 3}
+    mapCheckExp: ^l4d_tbm
+  - mapCNName: "\u9057\u5FD8\u4E4B\u5730"
+    mapPosterImage: {fileID: 21300000, guid: f669c198f658c064f9a8069f5e389db2, type: 3}
+    mapCheckExp: ^threedays
+  - mapCNName: "\u7981\u95ED"
+    mapPosterImage: {fileID: 21300000, guid: 08d17f4db398d8540887493195536fa4, type: 3}
+    mapCheckExp: ^bt
