@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PageUIDiscover : PageUIBase
 {
+    public RectTransform contentRoot;
+    protected GameObject contentUI;
+
     #region Internal Methods
     protected List<PageIndex> GetAllPages()
     {
@@ -22,73 +25,67 @@ public class PageUIDiscover : PageUIBase
     #region Page Life Cycle
     protected override void OnLoadPage(params object[] pars)
     {
-        closed = false;
-        InAppBrowser.ClearCache();
-
-        InAppBrowserProxy.Instance.UnregisterAllJSMessageHandlers();
-        InAppBrowserProxy.Instance.RegisterJSMessageHandler(OnReceiveBrowserMessage);
-
-        InAppBrowserProxy.Instance.UnregisterAllOnCloseHandlers();
-        InAppBrowserProxy.Instance.RegisterOnCloseHandler(OnBrowserClosed);
-
-        InAppBrowserProxy.Instance.OpenBrowser(RCUrlManager.Instance.settings.urlDiscover, null, OnWebPageSuccessfullyLoaded);
-
-        StartCoroutine(BrowserCloseDetectRoutine());
+        //
+        StartCoroutine(LoadPageRoutine());
     }
 
+    IEnumerator LoadPageRoutine()
+    {
+        if(DiscoverContentManager.Instance.ContentUIPrefab!=null)
+        {
+            CreateContentUI();
+            yield break;
+        }
 
+        DiscoverContentManager.Instance.CommitDiscoverContentRequest();
+
+        float timer = 0f;
+        while(DiscoverContentManager.Instance.ContentUIPrefab==null)
+        {
+            timer += Time.deltaTime;
+            if(timer>20f)
+            {
+                yield break;
+            }
+            yield return null;
+        }
+
+        CreateContentUI();
+    }
+
+    void CreateContentUI()
+    {
+        contentUI = Instantiate(DiscoverContentManager.Instance.ContentUIPrefab);
+        contentUI.SetActive(true);
+
+        RectTransform rectTransform = contentUI.GetComponent<RectTransform>();
+        rectTransform.SetParent(contentRoot);
+
+        rectTransform.anchoredPosition = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(1, 1);
+
+        rectTransform.offsetMin = new Vector2(0, 0);
+        rectTransform.offsetMax = new Vector2(0, 0);
+
+        //rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1);
+        //rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1);
+
+        rectTransform.localScale =new Vector3(1, 1, 1);
+    }
+
+    public void GoBack()
+    {
+        StopAllCoroutines();
+        PageUIManager.Instance.GoBack();
+    }
 
     protected override void OnDestroyPage()
     {
-
+        if(contentUI!=null)
+        {
+            Destroy(contentUI);
+        }
     }
     #endregion
-
-    IEnumerator BrowserCloseDetectRoutine()
-    {
-        if (Application.isEditor)
-        {
-            yield return new WaitForSeconds(2f);
-            OnBrowserClosed();
-        }
-        else
-        {
-            while (!InAppBrowser.IsInAppBrowserOpened())
-            {
-                yield return null;
-            }
-
-            while (InAppBrowser.IsInAppBrowserOpened())
-            {
-                yield return null;
-            }
-
-            OnBrowserClosed();
-        }
-    }
-
-    #region Web Browser Page Callbacks
-    bool closed = true;
-    protected void OnBrowserClosed()
-    {
-        if (!closed)
-        {
-            PageUIManager.Instance.GoBack();
-        }
-        closed = true;
-    }
-    #endregion
-
-    protected virtual void OnReceiveBrowserMessage(string message)
-    {
-        if (message == "exit")
-        {
-            InAppBrowserProxy.Instance.CloseBrowser();
-        }
-    }
-
-    protected virtual void OnWebPageSuccessfullyLoaded(string url)
-    {
-
-    }
 }
