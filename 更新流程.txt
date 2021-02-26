@@ -1,5 +1,0 @@
-1.在UnityEditor中增加或者修复功能，修改AppUpdater下的版本号；
-2.将Android工程导出至AssetsContainer下的工程目录中；
-3.将AssetsContainer下/src/main/assets文件夹整个拷贝到L4D2ServerBrowser工程目录下的对应位置；
-4.修改gradle下的VersionName,创建release版的apk；
-5.上传至服务器，修改配置文件；

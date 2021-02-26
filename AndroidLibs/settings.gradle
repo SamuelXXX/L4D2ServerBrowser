@@ -1,0 +1,2 @@
+include ':apkinstaller'
+rootProject.name='AndroidLibs'

@@ -1,0 +1,3 @@
+1.在UnityEditor中增加或者修复功能，修改AppUpdater下的版本号和更新说明；
+2.点击Build Update按钮进行Apk Build和Config Build；
+3.将AppUpdate文件夹上传至FTP服务器；
