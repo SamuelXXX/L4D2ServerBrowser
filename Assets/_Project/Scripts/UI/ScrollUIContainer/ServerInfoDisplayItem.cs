@@ -33,7 +33,6 @@ public class ServerInfoDisplayItem : MonoBehaviour
         coverButton.onClick.AddListener(OnEnterDetailInfo);
     }
 
-    string lastCheckMapName;
     MapContentMapper.MapInfoItem mapInfo;
     // Update is called once per frame
     void Update()
@@ -73,15 +72,12 @@ public class ServerInfoDisplayItem : MonoBehaviour
                 infoLayer.SetActive(false);
 
                 serverNameText.text = bindAgent.serverInfo.serverName;
-                if (lastCheckMapName != bindAgent.serverInfo.serverMap)
-                {
-                    if (MapContentMapper.ThirdPartyInstance != null)
-                        mapInfo = MapContentMapper.ThirdPartyInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
 
-                    if (mapInfo == null || string.IsNullOrEmpty(mapInfo.mapCNName))
-                        mapInfo = MapContentMapper.OfficialInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
-                    lastCheckMapName = bindAgent.serverInfo.serverMap;
-                }
+                if (MapContentMapper.ThirdPartyInstance != null)
+                    mapInfo = MapContentMapper.ThirdPartyInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
+
+                if (mapInfo == null || string.IsNullOrEmpty(mapInfo.mapCNName))
+                    mapInfo = MapContentMapper.OfficialInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
 
                 mapCNNameText.text = mapInfo.mapCNName;
                 posterImage.sprite = mapInfo.mapPosterImage;
