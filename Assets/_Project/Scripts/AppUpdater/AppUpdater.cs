@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.Build.Reporting;
 #endif
 using UnityEngine;
 using UnityEngine.Networking;
+using PowerInspector;
+using System.Text.RegularExpressions;
 
 public class AppUpdater : ShortLifeSingleton<AppUpdater>
 {
@@ -15,6 +18,7 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
     public class AppUpdateConfig
     {
         public string version;
+        [ReadOnly]
         public string urlApkDownloadingPath;
         public string updateInfo;
 
@@ -102,12 +106,14 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
 
     #region Settings
-    public string appVersion = "2.0";
+    public string rootPath;
+    public AppUpdateConfig appConfig;
+    [ReadOnly]
     public string urlAppUpdateConfigPath;
     #endregion
 
     #region Runtime Data
-    protected AppUpdateConfig config = null;
+    protected AppUpdateConfig remoteConfig = null;
     AndroidJavaObject apkInstaller = null;
     AndroidJavaObject APKInstaller
     {
@@ -135,7 +141,10 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
     private void OnValidate()
     {
 #if UNITY_EDITOR
-        PlayerSettings.bundleVersion = appVersion;
+        PlayerSettings.bundleVersion = appConfig.version;
+        appConfig.urlApkDownloadingPath = rootPath + "Android/L4D2ServerBrowser.apk";
+        urlAppUpdateConfigPath = rootPath + "AppUpdateConfig.txt";
+        EditorUtility.SetDirty(this);
 #endif
     }
     #endregion
@@ -154,7 +163,7 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
             return;
         }
 
-        config = JsonUtility.FromJson<AppUpdateConfig>(data.text);
+        remoteConfig = JsonUtility.FromJson<AppUpdateConfig>(data.text);
     }
     #region Exposed API
 
@@ -164,13 +173,13 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     public bool CheckNeedUpdate()
     {
-        if (config == null || string.IsNullOrEmpty(config.version))
+        if (remoteConfig == null || string.IsNullOrEmpty(remoteConfig.version))
         {
             Debug.LogError("App Update Config Invalid!");
             return false;
         }
 
-        if (config.VersionNewerThan(appVersion))
+        if (remoteConfig.VersionNewerThan(appConfig.version))
         {
             return true;
         }
@@ -183,15 +192,15 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     public string GetUpdateInfo()
     {
-        if (config == null || string.IsNullOrEmpty(config.version))
+        if (remoteConfig == null || string.IsNullOrEmpty(remoteConfig.version))
         {
             Debug.LogError("App Update Config Invalid!");
             return null;
         }
 
-        if (config.VersionNewerThan(appVersion))
+        if (remoteConfig.VersionNewerThan(appConfig.version))
         {
-            return config.updateInfo;
+            return remoteConfig.updateInfo;
         }
         else
         {
@@ -206,15 +215,15 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
         downloadSucceedHandler = succeedHandler;
         downloadFailedHandler = failedHandler;
 
-        if (config == null || string.IsNullOrEmpty(config.version))
+        if (remoteConfig == null || string.IsNullOrEmpty(remoteConfig.version))
         {
             Debug.LogError("App Update Config Invalid!");
             return false;
         }
 
-        if (config.VersionNewerThan(appVersion))
+        if (remoteConfig.VersionNewerThan(appConfig.version))
         {
-            StartCoroutine(DownloadAPK(config.urlApkDownloadingPath));
+            StartCoroutine(DownloadAPK(remoteConfig.urlApkDownloadingPath));
             return true;
         }
         else
@@ -298,5 +307,76 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
             APKInstaller.Call<bool>("showToast", content);
         }
     }
+
+#if UNITY_EDITOR
+    public PowerButton button = new PowerButton("Build Update", "BuildUpdate", 50);
+    public void BuildUpdate()
+    {
+        BuildAPK();
+        BuildJSON();
+    }
+
+    void BuildAPK()
+    {
+
+        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+        buildPlayerOptions.scenes = new[] { "Assets/_Project/Scenes/main.unity"};
+        buildPlayerOptions.locationPathName="AppUpdate/Android/L4D2ServerBrowser.apk";
+        buildPlayerOptions.target = BuildTarget.Android;
+        buildPlayerOptions.options = BuildOptions.None;
+
+        var report=BuildPipeline.BuildPlayer(buildPlayerOptions);
+        var summary = report.summary;
+
+        if (summary.result == BuildResult.Succeeded)
+        {
+            Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
+        }
+
+        if (summary.result == BuildResult.Failed)
+        {
+            Debug.Log("Build failed");
+        }
+
+    }
+
+    string GetTaildDataPath()
+    {
+        string assetsPath = Application.dataPath;
+        Regex assetsPathRegExp = new Regex("/Assets$");
+
+        return assetsPathRegExp.Replace(assetsPath, "");
+    }
+
+    void BuildJSON()
+    {
+        string projectPath = GetTaildDataPath();
+        string jsonStorageFilePath = projectPath + "/AppUpdate/AppUpdateConfig.txt";
+
+        try
+        {
+            CreateFile(jsonStorageFilePath, JsonFormatter.FormatJson(JsonUtility.ToJson(appConfig)));
+            Debug.Log("Bundle Manifest file generated succeed@" + jsonStorageFilePath);
+        }
+        catch (Exception)
+        {
+            Debug.Log("Bundle Manifest file generated failed@" + jsonStorageFilePath);
+        }
+    }
+
+    void CreateFile(string _filePath, string _data)
+    {
+        FileInfo fi = new FileInfo(_filePath);
+
+        if (fi.Exists)
+            fi.Delete();
+
+        using (StreamWriter sw = fi.CreateText())
+        {
+            sw.Write(_data);
+            sw.Close();
+        }
+    }
+#endif
     #endregion
 }

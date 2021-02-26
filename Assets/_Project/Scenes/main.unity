@@ -4409,7 +4409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6c5e53be892304eb92f23304853ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appVersion: 2.1
+  rootPath: http://120.27.1.226/L4D2ServerBrowser/_Test/AppUpdate/
+  appConfig:
+    version: 2.1
+    urlApkDownloadingPath: http://120.27.1.226/L4D2ServerBrowser/_Test/AppUpdate/Android/L4D2ServerBrowser.apk
+    updateInfo: "\u6700\u65B0\u7248\u672C2.1"
   urlAppUpdateConfigPath: http://120.27.1.226/L4D2ServerBrowser/_Test/AppUpdate/AppUpdateConfig.txt
 --- !u!1 &798615170
 GameObject:
