@@ -108,6 +108,27 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     #region Runtime Data
     protected AppUpdateConfig config = null;
+    AndroidJavaObject apkInstaller = null;
+    AndroidJavaObject APKInstaller
+    {
+        get
+        {
+            if(apkInstaller==null)
+            {
+                apkInstaller=new AndroidJavaObject("com.SamaelXXX.APKTools.APKInstaller");
+            }
+            return apkInstaller;
+        }
+    }  
+    
+    string ApkStorePath
+    {
+        get
+        {
+            string path = Application.persistentDataPath;
+            return path + "/L4D2ServerBrowser.apk";
+        }
+    }
     #endregion
 
     #region Unity Life Cycle
@@ -121,6 +142,7 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     public void CommitAppUpdateRequest()
     {
+        //Toast("Commit App Update Request");
         WebRequestAgent.Instance.Get(urlAppUpdateConfigPath, OnReceiveAppUpdateData);
     }
 
@@ -204,7 +226,7 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     IEnumerator DownloadAPK(string apkDownloadPath)
     {
-        string path = Application.persistentDataPath + "/L4D2ServerBrowser.apk";
+        string path = ApkStorePath;
         FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
         BinaryWriter bw = new BinaryWriter(fs);
 
@@ -263,10 +285,18 @@ public class AppUpdater : ShortLifeSingleton<AppUpdater>
 
     public void InstallNewVersionAPK()
     {
-        AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
-        bool b = currentActivity.Call<bool>("installAPK", Application.persistentDataPath + "/L4D2ServerBrowser.apk");//APK路径
+        if (APKInstaller != null)
+        {
+            APKInstaller.Call("InstallApk", "com.SamaelXXX.L4D2ServerBrowser", ApkStorePath);
+        }
+    }
 
+    public void Toast(string content)
+    {
+        if(APKInstaller!=null)
+        {
+            APKInstaller.Call<bool>("showToast", content);
+        }
     }
     #endregion
 }
