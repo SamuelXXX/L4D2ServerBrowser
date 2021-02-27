@@ -1,8 +1,10 @@
 fileFormatVersion: 2
 guid: c9d3a7e24d889a7418ad19a390178f88
-timeCreated: 1489370693
-licenseType: Pro
-DefaultImporter:
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+  script: {fileID: 11500000, guid: 9572990724dad2c4fbb71a37ccd2f00c, type: 3}
