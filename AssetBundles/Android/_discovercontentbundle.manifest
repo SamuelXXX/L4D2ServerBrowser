@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1800427391
+CRC: 1617909970
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a9532b986a0acf366a29d3094a12583b
+    Hash: 529ba0b02614b81aa22a467a09945494
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bae26e32cbdff1ef7f0cbe41fd3dfddb
+    Hash: 2c5078f5ff4c7005fe8b7ac3cfe063db
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,16 +17,32 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 41f1c5417c9d7ab4b84e531f83f60a4b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 68356c3764ad390429ddad9e48ce8c31, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b9173d38911503c4a9a371b0760bdd15, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
+  Script: {instanceID: 0}
+- Class: 213
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/demo.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/database_test.lua
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/ContentUI.prefab
 Dependencies: []
