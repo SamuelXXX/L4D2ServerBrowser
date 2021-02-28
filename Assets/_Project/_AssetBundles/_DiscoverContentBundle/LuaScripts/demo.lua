@@ -1,8 +1,7 @@
 local util=require 'xlua.util'
+local sql_agent=CS.SQLRequestAgent.Instance
 
 function start()
-	local query = "select steam_id,user_name from players_basic limit 50";
-    CS.SQLRequestAgent.Instance:PerformSQLRequest(query,callback)
 	self:StartCoroutine(util.cs_generator(query_routine))
 end
 
@@ -15,8 +14,10 @@ function callback(reader)
 end
 
 function query_routine()
+	local query = "select steam_id,user_name from players_basic limit 50";
 	while true do
-		print("Test")
-		coroutine.yield(CS.UnityEngine.WaitForSeconds(1))
+		sql_agent:Toast("SQL query")
+		sql_agent:PerformSQLRequest(query,callback)
+		coroutine.yield(CS.UnityEngine.WaitForSeconds(10))
 	end
 end

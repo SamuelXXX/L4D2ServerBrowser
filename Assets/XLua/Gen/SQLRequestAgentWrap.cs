@@ -21,9 +21,10 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(SQLRequestAgent);
-			Utils.BeginObjectRegister(type, L, translator, 0, 2, 6, 6);
+			Utils.BeginObjectRegister(type, L, translator, 0, 3, 6, 6);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "PerformSQLRequest", _m_PerformSQLRequest);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Toast", _m_Toast);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Test", _m_Test);
 			
 			
@@ -102,6 +103,34 @@ namespace XLua.CSObjectWrap
                     SQLRequestAgent.SQLDataReaderCallback _callback = translator.GetDelegate<SQLRequestAgent.SQLDataReaderCallback>(L, 3);
                     
                     gen_to_be_invoked.PerformSQLRequest( _query, _callback );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_Toast(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                SQLRequestAgent gen_to_be_invoked = (SQLRequestAgent)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    string _content = LuaAPI.lua_tostring(L, 2);
+                    
+                    gen_to_be_invoked.Toast( _content );
                     
                     
                     

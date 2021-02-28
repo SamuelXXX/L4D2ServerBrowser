@@ -174,6 +174,15 @@ public class SQLRequestAgent : ShortLifeSingleton<SQLRequestAgent>
             requestQueue.Enqueue(new SQLRequest(query, callback));
     }
 
+    public void Toast(string content)
+    {
+        AndroidJavaObject apkInstaller = new AndroidJavaObject("com.SamaelXXX.APKTools.APKInstaller");
+        if (apkInstaller != null)
+        {
+            apkInstaller.Call<bool>("showToast", content);
+        }
+    }
+
     [ContextMenu("Test")]
     public void Test()
     {
