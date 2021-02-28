@@ -120,6 +120,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &449025670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449025672}
+  - component: {fileID: 449025671}
+  m_Layer: 0
+  m_Name: SQLRequestAgent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &449025671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449025670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbab383a0193d741b9ac818f23b5539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  server: 123.60.1.34
+  port: 3306
+  database: supercoop-players-records
+  uid: root
+  pwd: l4d2@servers
+  connectionMethod: server=123.60.1.34;port=3306;database=supercoop-players-records;uid=root;pwd=l4d2@servers
+--- !u!4 &449025672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449025670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &675252096
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,3 +633,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3da02fc7f0b18941831cdec5b74e312, type: 3}
+--- !u!1 &3656679739991828160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3656679738395940056, guid: b3da02fc7f0b18941831cdec5b74e312,
+    type: 3}
+  m_PrefabInstance: {fileID: 3656679739991828159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3656679739991828161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656679739991828160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9173d38911503c4a9a371b0760bdd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luaScript: {fileID: -184258656295378624, guid: 2bad2567e0b56e548b7258d53eccc332,
+    type: 3}
+  injections: []
