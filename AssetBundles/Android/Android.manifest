@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2611035337
+CRC: 3964340548
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,4 +7,5 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: _discovercontentbundle
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: _thirdpartymapbundle

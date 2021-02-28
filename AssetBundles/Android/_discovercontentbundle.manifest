@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1617909970
+CRC: 3533285837
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 529ba0b02614b81aa22a467a09945494
+    Hash: d02fb323d229cb6fa5f989e55bd7fc71
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2c5078f5ff4c7005fe8b7ac3cfe063db
+    Hash: dfec9b6e22d548903ebd6af61380153d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -23,6 +23,16 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 41f1c5417c9d7ab4b84e531f83f60a4b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 68356c3764ad390429ddad9e48ce8c31, type: 3}
 - Class: 114
@@ -43,6 +53,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/demo.lua
-- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/database_test.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/button_click.lua
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/ContentUI.prefab
-Dependencies: []
+Dependencies:
+- G:/_Projects/L4D2ServerBrowser/AssetBundles/Android/_thirdpartymapbundle

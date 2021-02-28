@@ -457,7 +457,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1448860238
+--- !u!224 &1608643176 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3656679738395940055, guid: b3da02fc7f0b18941831cdec5b74e312,
+    type: 3}
+  m_PrefabInstance: {fileID: 3656679739991828159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!21 &1703477004
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -490,12 +496,6 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!224 &1608643176 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3656679738395940055, guid: b3da02fc7f0b18941831cdec5b74e312,
-    type: 3}
-  m_PrefabInstance: {fileID: 3656679739991828159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1808216395
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +723,6 @@ PrefabInstance:
     - target: {fileID: 1164588482, guid: b3da02fc7f0b18941831cdec5b74e312, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 1448860238}
+      objectReference: {fileID: 1703477004}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3da02fc7f0b18941831cdec5b74e312, type: 3}
