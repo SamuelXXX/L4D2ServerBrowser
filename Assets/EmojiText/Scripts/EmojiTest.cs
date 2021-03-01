@@ -16,7 +16,7 @@ public class EmojiTest : MonoBehaviour
     void Update()
     {
         Text txt = GetComponent<EmojiText>();
-        txt.text = "<color=red>6🌗7🌘🐳🌗🌗一号陪练dff</color>";
+        txt.text = "<color=red>第一行：🌗7🌘🐳🌗🌗一号陪练dff</color>\n第二行：<color=red>🌗7🌘🐳🌗🌗一号陪练dff</color>";
         //txt.text = "12  3<color=blue>[USERNAME]</color><color=red>( )</color>";
     }
 }

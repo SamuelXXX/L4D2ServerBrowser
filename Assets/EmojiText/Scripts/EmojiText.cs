@@ -4,15 +4,31 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System;
 
-public class EmojiText : Text 
+public class EmojiText : Text
 {
-	private const float ICON_SCALE_OF_DOUBLE_SYMBOLE = 0.7f;
-    public override float preferredWidth => cachedTextGeneratorForLayout.GetPreferredWidth(emojiText, GetGenerationSettings(rectTransform.rect.size)) / pixelsPerUnit;
-	public override float preferredHeight => cachedTextGeneratorForLayout.GetPreferredHeight(emojiText, GetGenerationSettings(rectTransform.rect.size)) / pixelsPerUnit;
+    private const float ICON_SCALE_OF_DOUBLE_SYMBOLE = 1f;
+    private readonly static string EMOJI_REPLACER_STR = "国";//Emoji占位符
+    private readonly static int EMOJI_REPLACER_LENGTH = EMOJI_REPLACER_STR.Length; //Emoji占位符长度
+
+    public override float preferredWidth
+    {
+        get
+        {
+            return cachedTextGeneratorForLayout.GetPreferredWidth(emojiText, GetGenerationSettings(rectTransform.rect.size)) / pixelsPerUnit;
+        }
+    }
+    public override float preferredHeight
+    {
+        get
+        {
+            return cachedTextGeneratorForLayout.GetPreferredHeight(emojiText, GetGenerationSettings(rectTransform.rect.size)) / pixelsPerUnit;
+        }      
+    }
 
     public string emojiText;
     
-	private static Dictionary<string,EmojiInfo> m_EmojiIndexDict = null;
+
+    private static Dictionary<string,EmojiInfo> m_EmojiIndexDict = null;
 
 	struct EmojiInfo
 	{
@@ -35,11 +51,12 @@ public class EmojiText : Text
         return string.Join(string.Empty, converted);
     }
 
-    string GetPureText()
+    string GetRenderableText()
     {
-        string pureText = text;
-        pureText = Regex.Replace(pureText, "<color=?[ 0-9a-zA-Z#]*>|</color>|<b>|</b>|<i>|</i>", "");
-        return pureText;
+        //Parse Renderable Text From Original Text to Calculate Emoji Render Position
+        string renderableText = text;
+        renderableText = Regex.Replace(renderableText, @"<color=?[ 0-9a-zA-Z#]*>|</color>|<b>|</b>|<i>|</i>|\s", "");
+        return renderableText;
     }
 
     protected override void OnPopulateMesh(VertexHelper toFill)
@@ -50,6 +67,7 @@ public class EmojiText : Text
         }
         if (m_EmojiIndexDict == null)
         {
+            //Try Build Emoji Index Dict
             m_EmojiIndexDict = new Dictionary<string, EmojiInfo>();
 
 			//load emoji data, and you can overwrite this segment code base on your project.
@@ -63,12 +81,9 @@ public class EmojiText : Text
 					info.x = float.Parse (strs [3]);
 					info.y = float.Parse (strs [4]);
 					info.size = float.Parse (strs [5]);
-
-                    string key = strs[0].Substring(1, strs[0].Length - 2);
+                    string key = strs[0].Substring(1, strs[0].Length - 2);//Remove '{' '}'
                     key = GetConvertedString(key);
-                    //Debug.Log(key);
                     m_EmojiIndexDict.Add (key, info);
-                    //Debug.Log(info.size);
 				}
 			}
 		}
@@ -77,77 +92,54 @@ public class EmojiText : Text
 
 
         emojiText = text;
-        string replaceStr = "EE";
+        
         if (supportRichText)
-        {
-			int nParcedCount = 0;
-			//[1] [123] 替换成#的下标偏移量			
+        {	
 			int nOffset = 0;
-            //MatchCollection matches = Regex.Matches (text, "\\[[a-z0-9A-Z]+\\]");
-            //for (int i = 0; i < matches.Count; i++)
-            //         {
-            //	EmojiInfo info;
-            //	if (m_EmojiIndexDict.TryGetValue (matches[i].Value, out info))
-            //             {
-            //                 emojiDic.Add(matches[i].Index - nOffset + nParcedCount, info);
-            //                 nOffset += matches [i].Length - 1;
-            //		nParcedCount++;
-            //	}
-            //}
           
             int i = 0;
-            string pureText = GetPureText();
-            //Debug.Log(pureText);
-            while (i < pureText.Length)
+            string renderableText = GetRenderableText();
+
+            //Debug.Log(renderableText);
+            while (i < renderableText.Length)
             {
-                string singleChar = pureText.Substring(i, 1);
+                string singleChar = renderableText.Substring(i, 1);
                 string doubleChar = "";
                 string fourChar = "";
 
-                if (i < (pureText.Length - 1))
+                if (i < (renderableText.Length - 1))
                 {
-                    doubleChar = pureText.Substring(i, 2);
+                    doubleChar = renderableText.Substring(i, 2);
                 }
 
-                if (i < (pureText.Length - 3))
+                if (i < (renderableText.Length - 3))
                 {
-                    fourChar = pureText.Substring(i, 4);
+                    fourChar = renderableText.Substring(i, 4);
                 }
 
                 EmojiInfo info;
                 if (m_EmojiIndexDict.TryGetValue(fourChar, out info))
                 {
-                    // Check 64 bit emojis first
-                    emojiDic.Add(i - nOffset + nParcedCount, info);
-                    emojiText = emojiText.Replace(fourChar, replaceStr);
-                    nOffset += 3;
-                    nParcedCount++;
+                    // 四字符Emoji
+                    emojiDic.Add(i - nOffset, info);
+                    emojiText = emojiText.Replace(fourChar, EMOJI_REPLACER_STR);
+                    nOffset += (4-EMOJI_REPLACER_LENGTH);
                     i += 4;
                 }
                 else if (m_EmojiIndexDict.TryGetValue(doubleChar, out info))
                 {
-                    // Then check 32 bit emojis
-                    emojiDic.Add(i - nOffset + nParcedCount, info);
-                    emojiText = emojiText.Replace(doubleChar, replaceStr);
-                    nOffset += 1;
-                    nParcedCount++;
+                    // 双字符Emoji
+                    emojiDic.Add(i - nOffset, info);
+                    emojiText = emojiText.Replace(doubleChar, EMOJI_REPLACER_STR);
+                    nOffset += (2 - EMOJI_REPLACER_LENGTH);
                     i += 2;
                 }
                 else if (m_EmojiIndexDict.TryGetValue(singleChar, out info))
                 {
-                    // Finally check 16 bit emojis
-                    emojiDic.Add(i - nOffset + nParcedCount, info);
-                    emojiText = emojiText.Replace(singleChar, replaceStr);
-                    nOffset += 0;
-                    nParcedCount++;
-                    i++;
-                }
-                else if (singleChar==" ")
-                {
-                    // Finally check 16 bit emojis
-                    //emojiDic.Add(i - nOffset + nParcedCount, info);
-                    //emojiText = emojiText.Replace(singleChar, "%%");
-                    nOffset += 1;
+                    // 单字符Emoji
+                    emojiDic.Add(i - nOffset, info);
+                    emojiText = emojiText.Replace(singleChar, EMOJI_REPLACER_STR);
+                    nOffset += (1 - EMOJI_REPLACER_LENGTH);
                     i++;
                 }
                 else
@@ -156,8 +148,6 @@ public class EmojiText : Text
                 }
             }
         }
-
-        
 
 		// We don't care if we the font Texture changes while we are doing our Update.
 		// The end result of cachedTextGenerator will be valid for this instance.
@@ -209,16 +199,16 @@ public class EmojiText : Text
         }
         else
         {
-			for (int i = 0; i < verts.Count; ++i)
+            //Debug.Log(verts.Count);
+            for (int i = 0; i < verts.Count; ++i)
             {
-                //Debug.Log(verts.Count);
 				EmojiInfo info;
-				int index = i/4;
-				if (emojiDic.TryGetValue (index, out info))
+                int index = i / 4;
+                if (emojiDic.TryGetValue (index, out info))
                 {
-                    //compute the distance of '[' and get the distance of emoji 
-                    //计算2个%%的距离
-                    float emojiSize = 2 * (verts[i + 1].position.x - verts[i].position.x) * ICON_SCALE_OF_DOUBLE_SYMBOLE;
+                    //Processing Emoji
+                    //计算2个EE的距离
+                    float emojiSize = EMOJI_REPLACER_LENGTH * (verts[i + 1].position.x - verts[i].position.x) * ICON_SCALE_OF_DOUBLE_SYMBOLE;
 
                     float fCharHeight = verts[i + 1].position.y - verts[i + 2].position.y;
                     float fCharWidth = verts[i + 1].position.x - verts[i].position.x;
@@ -241,7 +231,7 @@ public class EmojiText : Text
 					m_TempVerts [2].position *= unitsPerPixel;
 					m_TempVerts [3].position *= unitsPerPixel;
 					
-					float pixelOffset = emojiDic [index].size / 32 / 2;
+					float pixelOffset = emojiDic [index].size / 32 / EMOJI_REPLACER_LENGTH;
 					m_TempVerts [0].uv1 = new Vector2 (emojiDic [index].x + pixelOffset, emojiDic [index].y + pixelOffset);
 					m_TempVerts [1].uv1 = new Vector2 (emojiDic [index].x - pixelOffset + emojiDic [index].size, emojiDic [index].y + pixelOffset);
 					m_TempVerts [2].uv1 = new Vector2 (emojiDic [index].x - pixelOffset + emojiDic [index].size, emojiDic [index].y - pixelOffset + emojiDic [index].size);
@@ -249,7 +239,7 @@ public class EmojiText : Text
 
 					toFill.AddUIVertexQuad (m_TempVerts);
 
-                    i += 4 * 2 - 1;
+                    i += 4 * EMOJI_REPLACER_LENGTH - 1;
                 }
                 else
                 {					

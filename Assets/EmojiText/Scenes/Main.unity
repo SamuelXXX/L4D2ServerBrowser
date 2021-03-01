@@ -358,8 +358,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: fdsaf fdsafa fasf
-  emojiText: fdsaf fdsafa fasf
+  m_Text: 
+  emojiText: 
 --- !u!222 &1204593007
 CanvasRenderer:
   m_ObjectHideFlags: 0
