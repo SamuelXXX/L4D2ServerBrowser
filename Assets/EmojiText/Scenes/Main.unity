@@ -322,8 +322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 374, y: -852}
-  m_SizeDelta: {x: 443, y: 533}
+  m_AnchoredPosition: {x: 597.3008, y: -852}
+  m_SizeDelta: {x: 889.6, y: 533}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1204593006
 MonoBehaviour:
@@ -358,7 +358,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: fdsaf fdsafa fasf
+  emojiText: fdsaf fdsafa fasf
 --- !u!222 &1204593007
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -430,7 +431,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 720, y: 1280}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -446,7 +447,7 @@ Canvas:
   m_GameObject: {fileID: 2032911739}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 686229007}
   m_PlaneDistance: 50
   m_PixelPerfect: 0

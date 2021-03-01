@@ -10,7 +10,7 @@ public class EmojiText : Text
     public override float preferredWidth => cachedTextGeneratorForLayout.GetPreferredWidth(emojiText, GetGenerationSettings(rectTransform.rect.size)) / pixelsPerUnit;
 	public override float preferredHeight => cachedTextGeneratorForLayout.GetPreferredHeight(emojiText, GetGenerationSettings(rectTransform.rect.size)) / pixelsPerUnit;
 
-    private string emojiText;
+    public string emojiText;
     
 	private static Dictionary<string,EmojiInfo> m_EmojiIndexDict = null;
 
@@ -33,6 +33,13 @@ public class EmojiText : Text
         }
 
         return string.Join(string.Empty, converted);
+    }
+
+    string GetPureText()
+    {
+        string pureText = text;
+        pureText = Regex.Replace(pureText, "<color=?[ 0-9a-zA-Z#]*>|</color>|<b>|</b>|<i>|</i>", "");
+        return pureText;
     }
 
     protected override void OnPopulateMesh(VertexHelper toFill)
@@ -70,6 +77,7 @@ public class EmojiText : Text
 
 
         emojiText = text;
+        string replaceStr = "EE";
         if (supportRichText)
         {
 			int nParcedCount = 0;
@@ -88,20 +96,22 @@ public class EmojiText : Text
             //}
           
             int i = 0;
-            while (i < text.Length)
+            string pureText = GetPureText();
+            //Debug.Log(pureText);
+            while (i < pureText.Length)
             {
-                string singleChar = text.Substring(i, 1);
+                string singleChar = pureText.Substring(i, 1);
                 string doubleChar = "";
                 string fourChar = "";
 
-                if (i < (text.Length - 1))
+                if (i < (pureText.Length - 1))
                 {
-                    doubleChar = text.Substring(i, 2);
+                    doubleChar = pureText.Substring(i, 2);
                 }
 
-                if (i < (text.Length - 3))
+                if (i < (pureText.Length - 3))
                 {
-                    fourChar = text.Substring(i, 4);
+                    fourChar = pureText.Substring(i, 4);
                 }
 
                 EmojiInfo info;
@@ -109,7 +119,7 @@ public class EmojiText : Text
                 {
                     // Check 64 bit emojis first
                     emojiDic.Add(i - nOffset + nParcedCount, info);
-                    emojiText = emojiText.Replace(fourChar, "??");
+                    emojiText = emojiText.Replace(fourChar, replaceStr);
                     nOffset += 3;
                     nParcedCount++;
                     i += 4;
@@ -118,7 +128,7 @@ public class EmojiText : Text
                 {
                     // Then check 32 bit emojis
                     emojiDic.Add(i - nOffset + nParcedCount, info);
-                    emojiText = emojiText.Replace(doubleChar, "??");
+                    emojiText = emojiText.Replace(doubleChar, replaceStr);
                     nOffset += 1;
                     nParcedCount++;
                     i += 2;
@@ -127,9 +137,17 @@ public class EmojiText : Text
                 {
                     // Finally check 16 bit emojis
                     emojiDic.Add(i - nOffset + nParcedCount, info);
-                    emojiText = emojiText.Replace(singleChar, "??");
+                    emojiText = emojiText.Replace(singleChar, replaceStr);
                     nOffset += 0;
                     nParcedCount++;
+                    i++;
+                }
+                else if (singleChar==" ")
+                {
+                    // Finally check 16 bit emojis
+                    //emojiDic.Add(i - nOffset + nParcedCount, info);
+                    //emojiText = emojiText.Replace(singleChar, "%%");
+                    nOffset += 1;
                     i++;
                 }
                 else
@@ -138,6 +156,8 @@ public class EmojiText : Text
                 }
             }
         }
+
+        
 
 		// We don't care if we the font Texture changes while we are doing our Update.
 		// The end result of cachedTextGenerator will be valid for this instance.
@@ -172,27 +192,28 @@ public class EmojiText : Text
         Vector2 roundingOffset = new Vector2(verts[0].position.x, verts[0].position.y) * unitsPerPixel;
         roundingOffset = PixelAdjustPoint(roundingOffset) - roundingOffset;
         toFill.Clear();
-		if (roundingOffset != Vector2.zero)
-		{
-		    for (int i = 0; i < vertCount; ++i)
-		    {
-		        int tempVertsIndex = i & 3;
-		        m_TempVerts[tempVertsIndex] = verts[i];
-		        m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
-		        m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
-		        m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
-		        if (tempVertsIndex == 3)
+        if (roundingOffset != Vector2.zero)
+        {
+            for (int i = 0; i < vertCount; ++i)
+            {
+                int tempVertsIndex = i & 3;
+                m_TempVerts[tempVertsIndex] = verts[i];
+                m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
+                m_TempVerts[tempVertsIndex].position.x += roundingOffset.x;
+                m_TempVerts[tempVertsIndex].position.y += roundingOffset.y;
+                if (tempVertsIndex == 3)
                 {
                     toFill.AddUIVertexQuad(m_TempVerts);
                 }
             }
-		}
-		else
-		{
-			for (int i = 0; i < vertCount; ++i)
+        }
+        else
+        {
+			for (int i = 0; i < verts.Count; ++i)
             {
+                //Debug.Log(verts.Count);
 				EmojiInfo info;
-				int index = i / 4;
+				int index = i/4;
 				if (emojiDic.TryGetValue (index, out info))
                 {
                     //compute the distance of '[' and get the distance of emoji 

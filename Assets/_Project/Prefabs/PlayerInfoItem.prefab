@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 459748373610357273}
   - component: {fileID: 459748373610357255}
-  - component: {fileID: 459748373610357254}
+  - component: {fileID: 8288777980398614521}
   m_Layer: 5
   m_Name: IDText
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459748373610357272}
   m_CullTransparentMesh: 0
---- !u!114 &459748373610357254
+--- !u!114 &8288777980398614521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,10 +133,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 459748373610357272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 6256e2d7818daf84189e4c021d959534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: ea02a8c7a6993804d9e33066bf140fba, type: 2}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -149,7 +149,7 @@ MonoBehaviour:
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u540D\u5B57\u4E0D\u80FD\u8D77\u592A\u957F\u5426\u5219\u4F1A\u88AB\u7248"
+  m_Text: 
 --- !u!1 &459748374048880847
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 459748374545028268}
-  idText: {fileID: 459748373610357254}
+  idText: {fileID: 8288777980398614521}
   scoreText: {fileID: 459748374048880845}
   durationText: {fileID: 459748372831865325}

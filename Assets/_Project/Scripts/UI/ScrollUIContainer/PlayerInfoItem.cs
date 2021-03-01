@@ -10,7 +10,7 @@ public class PlayerInfoItem : MonoBehaviour
     #region UI Reference
     [Header("UI Reference")]
     public Image backgroundImage;
-    public Text idText;
+    public EmojiText idText;
     public Text scoreText;
     public Text durationText;
     #endregion

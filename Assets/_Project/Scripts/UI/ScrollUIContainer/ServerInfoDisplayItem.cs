@@ -102,6 +102,8 @@ public class ServerInfoDisplayItem : MonoBehaviour
                     if (players.Length >= 1)
                         players = players.Substring(0, players.Length - 1);
                     playersNameText.text = players;
+                    playersNameText.enabled = false;
+                    playersNameText.enabled = true;
                 }
             }
         }
