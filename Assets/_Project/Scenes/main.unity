@@ -4411,9 +4411,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/
   appConfig:
-    version: 2.2
+    version: 2.3
     urlApkDownloadingPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/Android/L4D2ServerBrowser.apk
-    updateInfo: "\u589E\u52A0\u5BF9\u4E8EEmoji\u7684\u652F\u6301\uFF1B"
+    updateInfo: "\u4FEE\u590D\u670D\u52A1\u5668\u4E3A\u7A7A\u65F6\u670D\u52A1\u5668\u6807\u7B7E\u5361\u663E\u793A\u5F02\u5E38\u7684\u95EE\u9898\uFF1B"
   urlAppUpdateConfigPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/AppUpdateConfig.txt
 --- !u!1 &798615170
 GameObject:

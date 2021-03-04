@@ -1,5 +1,5 @@
 {
-    "version": "2.2",
+    "version": "2.3",
     "urlApkDownloadingPath": "http://120.27.1.226/L4D2ServerBrowser/AppUpdate/Android/L4D2ServerBrowser.apk",
-    "updateInfo": "增加对于Emoji的支持；"
+    "updateInfo": "修复服务器为空时服务器标签卡显示异常的问题；"
 }
