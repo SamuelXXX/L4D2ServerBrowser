@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 247963182
+CRC: 3187953236
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: de47cedf5ea5786028422860db206c9e
+    Hash: c65ee63ca48295cb4be3214a290f5780
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -18,6 +18,7 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/darkwood.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/white_forest.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/farewell_chenming.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/hometown.png

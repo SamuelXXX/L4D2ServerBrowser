@@ -56,3 +56,6 @@ MonoBehaviour:
   - mapCNName: "\u7981\u95ED"
     mapPosterImage: {fileID: 21300000, guid: 08d17f4db398d8540887493195536fa4, type: 3}
     mapCheckExp: ^bt
+  - mapCNName: "\u9ED1\u6697\u68EE\u6797"
+    mapPosterImage: {fileID: 21300000, guid: 43d3f0c0cdcce1a498a7c02942962572, type: 3}
+    mapCheckExp: ^dw_
