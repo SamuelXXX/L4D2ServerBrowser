@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3187953236
+CRC: 1133842131
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c65ee63ca48295cb4be3214a290f5780
+    Hash: 15a3de6d52e83d186cda4b12146565de
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -33,4 +33,5 @@ Assets:
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/bloodymoors.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/lockdown.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/hauntedforest.png
+- Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/zengcheng.png
 Dependencies: []

@@ -53,9 +53,12 @@ MonoBehaviour:
   - mapCNName: "\u9057\u5FD8\u4E4B\u5730"
     mapPosterImage: {fileID: 21300000, guid: f669c198f658c064f9a8069f5e389db2, type: 3}
     mapCheckExp: ^threedays
-  - mapCNName: "\u7981\u95ED"
+  - mapCNName: "\u5C01\u9501"
     mapPosterImage: {fileID: 21300000, guid: 08d17f4db398d8540887493195536fa4, type: 3}
     mapCheckExp: ^bt
-  - mapCNName: "\u9ED1\u6697\u68EE\u6797"
+  - mapCNName: "\u9634\u6697\u68EE\u6797"
     mapPosterImage: {fileID: 21300000, guid: 43d3f0c0cdcce1a498a7c02942962572, type: 3}
     mapCheckExp: ^dw_
+  - mapCNName: "\u5E7F\u5DDE\u589E\u57CE"
+    mapPosterImage: {fileID: 21300000, guid: bbe8db8efb33ddb4ab38bf36b33cd987, type: 3}
+    mapCheckExp: ^\d_m\d
