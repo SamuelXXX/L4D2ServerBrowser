@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1133842131
+CRC: 1855155869
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 15a3de6d52e83d186cda4b12146565de
+    Hash: e9e27c44fc01348790b5321c5e90960d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0d006afb78c7deae2e02b1de5aab5322
@@ -19,19 +19,31 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/darkwood.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u76D0\u4E95\u5730\u72F1\u516C\u56ED.png"
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u51AC\u65E5\u4F4E\u8BED.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/white_forest.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/farewell_chenming.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/hometown.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u771F\u9053.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/fallindeath.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u6B7B\u4EA1\u7CFB\u5217.png"
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u7559\u5728\u4E2D\u56FD.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/MapInfo.asset
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/heavencanwait2.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u56DE\u5230\u5B66\u6821.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/LastStand.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/warcelona.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u4E00\u56DB\u4E5D.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/landofoblivion.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/yama.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u81F4\u547D\u8D27\u8FD0\u7AD9.png"
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u6B7B\u4EA1\u7CFB\u5217v4.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/daybreak.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/bloodymoors.png
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/lockdown.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u7EDD\u5BF9\u96F6\u5EA6.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/hauntedforest.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u6B7B\u4EA12\u53F7\u8857.png"
 - Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/ThirdPartyPosters/zengcheng.png
+- "Assets/_Project/_AssetBundles/_ThirdPartyMapBundle/AdditionalPosters/\u6B7B\u4EA1\u8857\u533A2.png"
 Dependencies: []

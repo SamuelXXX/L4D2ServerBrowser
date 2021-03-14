@@ -62,3 +62,39 @@ MonoBehaviour:
   - mapCNName: "\u5E7F\u5DDE\u589E\u57CE"
     mapPosterImage: {fileID: 21300000, guid: bbe8db8efb33ddb4ab38bf36b33cd987, type: 3}
     mapCheckExp: ^\d_m\d
+  - mapCNName: "\u4E00\u56DB\u4E5D"
+    mapPosterImage: {fileID: 21300000, guid: 137a8388d31fd444cad12b2bc883b8f9, type: 3}
+    mapCheckExp: ^l4d_149
+  - mapCNName: "\u51AC\u65E5\u4F4E\u8BED"
+    mapPosterImage: {fileID: 21300000, guid: 85baf313596a6fd47a69a52d5aad7284, type: 3}
+    mapCheckExp: ^wow_
+  - mapCNName: "\u56DE\u5230\u5B66\u6821"
+    mapPosterImage: {fileID: 21300000, guid: 489755084d7ed8847beed1aaba476dc6, type: 3}
+    mapCheckExp: ^l4d2_bts01
+  - mapCNName: "\u6B7B\u4EA12\u53F7\u8857"
+    mapPosterImage: {fileID: 21300000, guid: 60fffc4e726d52b46a707f7cf1a71602, type: 3}
+    mapCheckExp: ^ds2_
+  - mapCNName: "\u6B7B\u4EA1\u7CFB\u5217"
+    mapPosterImage: {fileID: 21300000, guid: 0f1b97469ee85854b9ccfbbaf8047290, type: 3}
+    mapCheckExp: ^(desperate_houseway)|(coldstaircase)|(smallevill)|(band_of_rushers)
+  - mapCNName: "\u6B7B\u4EA1\u7CFB\u5217v4"
+    mapPosterImage: {fileID: 21300000, guid: 29761489bb5c76e4c93f931351ca9e4c, type: 3}
+    mapCheckExp: ^dead_series
+  - mapCNName: "\u6B7B\u4EA1\u8857\u533A2"
+    mapPosterImage: {fileID: 21300000, guid: 91eb821fb5acb1e41813038d2f164535, type: 3}
+    mapCheckExp: ^l4d2_deadstreet
+  - mapCNName: "\u7559\u5728\u4E2D\u56FD"
+    mapPosterImage: {fileID: 21300000, guid: 8b946d875e4d0434c933fd9e25c87a60, type: 3}
+    mapCheckExp: ^l4c_
+  - mapCNName: "\u76D0\u4E95\u5730\u72F1\u516C\u56ED"
+    mapPosterImage: {fileID: 21300000, guid: 2360bfd1a71418642a5c44c678937cc2, type: 3}
+    mapCheckExp: ^saltwell_\d
+  - mapCNName: "\u771F\u9053"
+    mapPosterImage: {fileID: 21300000, guid: 8b1626d4b076acc44b7b51c6ffcea06b, type: 3}
+    mapCheckExp: ^ch_map\d_
+  - mapCNName: "\u7EDD\u5BF9\u96F6\u5EA6"
+    mapPosterImage: {fileID: 21300000, guid: aea17c9da197105489367db6e7af2a93, type: 3}
+    mapCheckExp: ^l4d_zero0\d_
+  - mapCNName: "\u81F4\u547D\u8D27\u8FD0\u7AD9"
+    mapPosterImage: {fileID: 21300000, guid: 2704063954c912a48b49c50f7bad812e, type: 3}
+    mapCheckExp: ^l4d2_ff0\d_
