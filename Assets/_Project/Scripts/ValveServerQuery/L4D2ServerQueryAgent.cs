@@ -131,7 +131,7 @@ public class L4D2ServerQueryAgent : MonoBehaviour
     {
         if (client != null && status != L4D2ServerAgentStatus.WaitForChallengeNumber)
         {
-            client.SendQueryMessage((byte)ValveServerRequestType.A2S_Info, -1);
+            client.SendQueryMessage((byte)ValveServerRequestType.A2S_Info, challengeNumberInfo.challengeNumber);
             yield return new WaitForSeconds(0.1f);//Wait for 0.1 seconds to perform players query
             client.SendQueryMessage((byte)ValveServerRequestType.A2S_Player, challengeNumberInfo.challengeNumber);
         }

@@ -156,6 +156,7 @@ namespace ValveServerQuery
             {
                 case ValveServerRequestType.A2S_Info:
                     buff.WriteString("Source Engine Query");
+                    buff.WriteInt(challengeNumber);
                     break;
                 case ValveServerRequestType.A2S_Player:
                     buff.WriteInt(challengeNumber);
