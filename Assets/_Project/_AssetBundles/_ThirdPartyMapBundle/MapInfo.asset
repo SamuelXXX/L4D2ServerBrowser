@@ -70,7 +70,7 @@ MonoBehaviour:
     mapCheckExp: ^wow_
   - mapCNName: "\u56DE\u5230\u5B66\u6821"
     mapPosterImage: {fileID: 21300000, guid: 489755084d7ed8847beed1aaba476dc6, type: 3}
-    mapCheckExp: ^l4d2_bts01
+    mapCheckExp: ^l4d2_bts
   - mapCNName: "\u6B7B\u4EA12\u53F7\u8857"
     mapPosterImage: {fileID: 21300000, guid: 60fffc4e726d52b46a707f7cf1a71602, type: 3}
     mapCheckExp: ^ds2_
