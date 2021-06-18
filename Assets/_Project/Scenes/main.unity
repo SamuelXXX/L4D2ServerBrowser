@@ -4378,9 +4378,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/
   appConfig:
-    version: 2.4
+    version: 2.5
     urlApkDownloadingPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/Android/L4D2ServerBrowser.apk
-    updateInfo: "\u4FEE\u590D\u670D\u52A1\u5668\u4E3A\u7A7A\u65F6\u670D\u52A1\u5668\u6807\u7B7E\u5361\u663E\u793A\u5F02\u5E38\u7684\u95EE\u9898\u4EE5\u53CA\u90E8\u5206\u4E09\u65B9\u56FE\u7684\u663E\u793A\u5F02\u5E38\u95EE\u9898\uFF1B"
+    updateInfo: "\u4FEE\u590D\u670D\u52A1\u5668\u672C\u4F53\u66F4\u65B0\u540E\u65E0\u6CD5\u83B7\u53D6\u670D\u52A1\u5668\u4FE1\u606F\u7684\u95EE\u9898\uFF1B"
   urlAppUpdateConfigPath: http://120.27.1.226/L4D2ServerBrowser/AppUpdate/AppUpdateConfig.txt
 --- !u!1 &798615170
 GameObject:
@@ -10145,7 +10145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000089078}
+  m_AnchoredPosition: {x: 0, y: 0.000091552734}
   m_SizeDelta: {x: 0, y: 133.9}
   m_Pivot: {x: 0.5, y: 1.0000001}
 --- !u!114 &1762634226
