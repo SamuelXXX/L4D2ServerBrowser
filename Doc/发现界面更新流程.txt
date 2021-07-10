@@ -1,0 +1,6 @@
+发现界面主要用于构建一些界面UI用于显示；主要是访问数据库，显示内容；
+1.打开_Project/_AssetBundles/_DiscoverContentBundle/discover_content_editor场景；
+2.编辑RootCanvas下面的ContentUI，不要添加新的C#脚本，所有脚本使用Lua编写，放在LuaScripts下面；
+3.完成后对ContentUI执行Apply Prefab功能，保存Prefab；
+4.打开菜单栏Window/AssetBundleBrowser，在Android平台Build AssetBunlde；
+5.将AssetBundle文件夹上传至服务器；
