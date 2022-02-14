@@ -98,3 +98,6 @@ MonoBehaviour:
   - mapCNName: "\u81F4\u547D\u8D27\u8FD0\u7AD9"
     mapPosterImage: {fileID: 21300000, guid: 2704063954c912a48b49c50f7bad812e, type: 3}
     mapCheckExp: ^l4d2_ff0\d_
+  - mapCNName: "\u4E07\u91CC"
+    mapPosterImage: {fileID: 21300000, guid: 06480112b7e5614448e424c5f9def11b, type: 3}
+    mapCheckExp: ^l4d2_wanli

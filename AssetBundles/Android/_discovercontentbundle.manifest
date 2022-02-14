@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3533285837
+CRC: 1850838324
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d02fb323d229cb6fa5f989e55bd7fc71
+    Hash: 4bd60437ad5f380d1c995fee95fcd9d4
   TypeTreeHash:
     serializedVersion: 2
     Hash: dfec9b6e22d548903ebd6af61380153d
@@ -53,7 +53,12 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/demo.lua
-- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/button_click.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/max_kill_query.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/kill_rank_query.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/all_time_query.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/campaign_query.lua
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/ContentUI.prefab
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/max_online_time_query.lua
+- Assets/_Project/_AssetBundles/_DiscoverContentBundle/UI/background.jpeg
 Dependencies:
 - G:/_Projects/L4D2ServerBrowser/AssetBundles/Android/_thirdpartymapbundle
