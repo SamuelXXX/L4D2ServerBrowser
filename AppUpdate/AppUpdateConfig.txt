@@ -1,5 +1,5 @@
 {
-    "version": "2.5",
+    "version": "2.6",
     "urlApkDownloadingPath": "http://120.27.1.226/L4D2ServerBrowser/AppUpdate/Android/L4D2ServerBrowser.apk",
-    "updateInfo": "修复服务器本体更新后无法获取服务器信息的问题；"
+    "updateInfo": "修复刚进入应用后打开服务器详情卡片卡死的情况；"
 }
