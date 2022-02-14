@@ -81,7 +81,7 @@ public class PageUIDetailInfo : PageUIBase
                 if (MapContentMapper.ThirdPartyInstance != null)
                     mapInfo = MapContentMapper.ThirdPartyInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
 
-                if (string.IsNullOrEmpty(mapInfo.mapCNName))
+                if (mapInfo==null || string.IsNullOrEmpty(mapInfo.mapCNName))
                     mapInfo = MapContentMapper.OfficialInstance.QueryByMapIndex(bindAgent.serverInfo.serverMap);
 
                 mapCNNameText.text = mapInfo.mapCNName;

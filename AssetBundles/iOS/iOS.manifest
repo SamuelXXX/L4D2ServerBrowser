@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 12784398
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: _thirdpartymapbundle
+      Dependencies: {}
+    Info_1:
+      Name: _discovercontentbundle
+      Dependencies:
+        Dependency_0: _thirdpartymapbundle

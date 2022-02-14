@@ -30,7 +30,9 @@ public class PageUIMain : PageUIBase
 
             StopAllCoroutines();
             StartCoroutine(CommitRequestsRoutine());
-            StartCoroutine(AppUpdatePollingRoutine());
+#if UNITY_ANDROID
+            StartCoroutine(AppUpdatePollingRoutine()); // Work only on android platform
+#endif
 
             List<IPData> serverList = pars[0] as List<IPData>;
             L4D2QueryAgentManager.Instance.StartQuery(serverList);//Create Query Agents
