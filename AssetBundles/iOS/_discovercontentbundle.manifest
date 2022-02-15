@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1765209439
+CRC: 1257408526
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0b2087df26e2bbec3ef7642001cd9b23
+    Hash: bc17d8d978b5759569b9fe2676b5e239
   TypeTreeHash:
     serializedVersion: 2
     Hash: dfec9b6e22d548903ebd6af61380153d
@@ -59,6 +59,5 @@ Assets:
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/campaign_query.lua
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/ContentUI.prefab
 - Assets/_Project/_AssetBundles/_DiscoverContentBundle/LuaScripts/max_online_time_query.lua
-- Assets/_Project/_AssetBundles/_DiscoverContentBundle/UI/background.jpeg
 Dependencies:
-- G:/_Projects/L4D2ServerBrowser/AssetBundles/iOS/_thirdpartymapbundle
+- E:/_Projects/github/L4D2ServerBrowser/AssetBundles/iOS/_thirdpartymapbundle
