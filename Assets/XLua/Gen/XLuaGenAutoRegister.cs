@@ -22,9 +22,6 @@ namespace XLua.CSObjectWrap
         static void wrapInit0(LuaEnv luaenv, ObjectTranslator translator)
         {
         
-            translator.DelayWrapLoader(typeof(SQLRequestAgent), SQLRequestAgentWrap.__Register);
-        
-        
             translator.DelayWrapLoader(typeof(object), SystemObjectWrap.__Register);
         
         
@@ -107,6 +104,9 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(UnityEngine.Debug), UnityEngineDebugWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(SQLRequestAgent), SQLRequestAgentWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(Tutorial.BaseClass), TutorialBaseClassWrap.__Register);

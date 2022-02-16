@@ -21,7 +21,7 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(UnityEngine.Light);
-			Utils.BeginObjectRegister(type, L, translator, 0, 7, 29, 28);
+			Utils.BeginObjectRegister(type, L, translator, 0, 7, 31, 30);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Reset", _m_Reset);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddCommandBuffer", _m_AddCommandBuffer);
@@ -33,10 +33,12 @@ namespace XLua.CSObjectWrap
 			
 			
 			Utils.RegisterFunc(L, Utils.GETTER_IDX, "type", _g_get_type);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "shape", _g_get_shape);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "spotAngle", _g_get_spotAngle);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "innerSpotAngle", _g_get_innerSpotAngle);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "color", _g_get_color);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "colorTemperature", _g_get_colorTemperature);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "useColorTemperature", _g_get_useColorTemperature);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "intensity", _g_get_intensity);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "bounceIntensity", _g_get_bounceIntensity);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "useBoundingSphereOverride", _g_get_useBoundingSphereOverride);
@@ -63,10 +65,12 @@ namespace XLua.CSObjectWrap
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "commandBufferCount", _g_get_commandBufferCount);
             
 			Utils.RegisterFunc(L, Utils.SETTER_IDX, "type", _s_set_type);
+            Utils.RegisterFunc(L, Utils.SETTER_IDX, "shape", _s_set_shape);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "spotAngle", _s_set_spotAngle);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "innerSpotAngle", _s_set_innerSpotAngle);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "color", _s_set_color);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "colorTemperature", _s_set_colorTemperature);
+            Utils.RegisterFunc(L, Utils.SETTER_IDX, "useColorTemperature", _s_set_useColorTemperature);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "intensity", _s_set_intensity);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "bounceIntensity", _s_set_bounceIntensity);
             Utils.RegisterFunc(L, Utils.SETTER_IDX, "useBoundingSphereOverride", _s_set_useBoundingSphereOverride);
@@ -414,6 +418,20 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_shape(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                UnityEngine.Light gen_to_be_invoked = (UnityEngine.Light)translator.FastGetCSObj(L, 1);
+                translator.Push(L, gen_to_be_invoked.shape);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _g_get_spotAngle(RealStatePtr L)
         {
 		    try {
@@ -463,6 +481,20 @@ namespace XLua.CSObjectWrap
 			
                 UnityEngine.Light gen_to_be_invoked = (UnityEngine.Light)translator.FastGetCSObj(L, 1);
                 LuaAPI.lua_pushnumber(L, gen_to_be_invoked.colorTemperature);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_useColorTemperature(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                UnityEngine.Light gen_to_be_invoked = (UnityEngine.Light)translator.FastGetCSObj(L, 1);
+                LuaAPI.lua_pushboolean(L, gen_to_be_invoked.useColorTemperature);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
@@ -824,6 +856,22 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_shape(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                UnityEngine.Light gen_to_be_invoked = (UnityEngine.Light)translator.FastGetCSObj(L, 1);
+                UnityEngine.LightShape gen_value;translator.Get(L, 2, out gen_value);
+				gen_to_be_invoked.shape = gen_value;
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _s_set_spotAngle(RealStatePtr L)
         {
 		    try {
@@ -877,6 +925,21 @@ namespace XLua.CSObjectWrap
 			
                 UnityEngine.Light gen_to_be_invoked = (UnityEngine.Light)translator.FastGetCSObj(L, 1);
                 gen_to_be_invoked.colorTemperature = (float)LuaAPI.lua_tonumber(L, 2);
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_useColorTemperature(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                UnityEngine.Light gen_to_be_invoked = (UnityEngine.Light)translator.FastGetCSObj(L, 1);
+                gen_to_be_invoked.useColorTemperature = LuaAPI.lua_toboolean(L, 2);
             
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
